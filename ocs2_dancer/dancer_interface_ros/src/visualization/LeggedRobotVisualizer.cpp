@@ -140,18 +140,19 @@ void LeggedRobotVisualizer::publishObservation(ros::Time timeStamp, const System
 /******************************************************************************************************/
 void LeggedRobotVisualizer::publishJointTransforms(ros::Time timeStamp, const vector_t& jointAngles) const {
   if (robotStatePublisherPtr_ != nullptr) {
-    std::map<std::string, scalar_t> jointPositions{
-        // { "Shoulder_Z_L",        0. }, { "Shoulder_X_L",          0. }, { "Shoulder_Y_L",          0. },
-        // { "Elbow_L",             0. }, { "Wrist_L",               0. },
-        // { "Shoulder_Z_R",        0. }, { "Shoulder_X_R",          0. }, { "Shoulder_Y_R",          0. },
-        // { "Elbow_R",             0. }, { "Wrist_R",               0. },
-        // { "Waist",               0. },
-        { "Hip_Z_L", jointAngles[0] }, { "Hip_X_L",   jointAngles[1] }, { "Hip_Y_L",   jointAngles[2] },
-        { "Knee_L",  jointAngles[3] }, { "Ankle_Y_L", jointAngles[4] }, { "Ankle_X_L", jointAngles[5] },
-        { "Hip_Z_R", jointAngles[6] }, { "Hip_X_R",   jointAngles[7] }, { "Hip_Y_R",   jointAngles[8] },
-        { "Knee_R",  jointAngles[9] }, { "Ankle_Y_R", jointAngles[10] },{ "Ankle_X_R", jointAngles[11] }
-      };
-    robotStatePublisherPtr_->publishTransforms(jointPositions, timeStamp);
+      std::map<std::string, scalar_t> jointPositions{
+          // { "Shoulder_Z_L",        0. }, { "Shoulder_X_L",          0. }, { "Shoulder_Y_L",          0. },
+          // { "Elbow_L",             0. }, { "Wrist_L",               0. },
+          // { "Shoulder_Z_R",        0. }, { "Shoulder_X_R",          0. }, { "Shoulder_Y_R",          0. },
+          // { "Elbow_R",             0. }, { "Wrist_R",               0. },
+          // { "Waist",               0. },
+          {"left_hip_yaw", jointAngles[0]},       {"left_hip_roll", jointAngles[1]},
+          {"left_hip_pitch", jointAngles[2]},     {"left_knee", jointAngles[3]},
+          {"left_ankle_pitch", jointAngles[4]},   {"left_ankle_roll", jointAngles[5]},
+          {"right_hip_yaw", jointAngles[6]},      {"right_hip_roll", jointAngles[7]},
+          {"right_hip_pitch", jointAngles[8]},    {"right_knee", jointAngles[9]},
+          {"right_ankle_pitch", jointAngles[10]}, {"right_ankle_roll", jointAngles[11]}};
+      robotStatePublisherPtr_->publishTransforms(jointPositions, timeStamp);
   }
 }
 

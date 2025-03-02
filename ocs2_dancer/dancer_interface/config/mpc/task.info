@@ -1,0 +1,255 @@
+centroidalModelType             0      // 0: FullCentroidalDynamics, 1: Single Rigid Body Dynamics
+  
+wukong4_interface
+{
+  verbose                               false  // show the loaded parameters
+  useAnalyticalGradientsDynamics        false
+  useAnalyticalGradientsConstraints     false
+}
+
+model_settings
+{
+  positionErrorGain             0.0 ; 20.0
+  phaseTransitionStanceTime     0.4
+
+  verboseCppAd                  true
+  recompileLibrariesCppAd       false
+  modelFolderCppAd              /tmp/ocs2
+}
+
+swing_trajectory_config
+{
+  liftOffVelocity               0.2
+  touchDownVelocity            -0.4
+  swingHeight                   0.1
+  touchdownAfterHorizon         0.2
+  swingTimeScale                0.15
+}
+
+; Multiple_Shooting SQP settings
+sqp
+{
+  nThreads                              3
+  dt                                    0.015
+  sqpIteration                          1
+  deltaTol                              1e-4
+  g_max                                 1e-2
+  g_min                                 1e-6
+  inequalityConstraintMu                0.1
+  inequalityConstraintDelta             5.0
+  projectStateInputEqualityConstraints  true
+  printSolverStatistics                 true
+  printSolverStatus                     false
+  printLinesearch                       false
+  useFeedbackPolicy                     true
+  integratorType                        RK2
+  threadPriority                        50
+}
+
+; Multiple_Shooting IPM settings
+ipm
+{
+  nThreads                              3
+  dt                                    0.015
+  ipmIteration                          1
+  deltaTol                              1e-4
+  g_max                                 10.0
+  g_min                                 1e-6
+  computeLagrangeMultipliers            true
+  printSolverStatistics                 true
+  printSolverStatus                     false
+  printLinesearch                       false
+  useFeedbackPolicy                     true
+  integratorType                        RK2
+  threadPriority                        50
+
+  initialBarrierParameter               1e-4
+  targetBarrierParameter                1e-4
+  barrierLinearDecreaseFactor           0.2
+  barrierSuperlinearDecreasePower       1.5
+  barrierReductionCostTol               1e-3
+  barrierReductionConstraintTol         1e-3
+
+  fractionToBoundaryMargin              0.995
+  usePrimalStepSizeForDual              false
+
+  initialSlackLowerBound                1e-4
+  initialDualLowerBound                 1e-4
+  initialSlackMarginRate                1e-2
+  initialDualMarginRate                 1e-2
+}
+
+; DDP settings
+ddp
+{
+  algorithm                       SLQ
+
+  nThreads                        3
+  threadPriority                  50
+
+  maxNumIterations                1
+  minRelCost                      1e-1
+  constraintTolerance             5e-3
+
+  displayInfo                     false
+  displayShortSummary             false
+  checkNumericalStability         false
+  debugPrintRollout               false
+
+  AbsTolODE                       1e-5
+  RelTolODE                       1e-3
+  maxNumStepsPerSecond            10000
+  timeStep                        0.015
+  backwardPassIntegratorType      ODE45
+
+  constraintPenaltyInitialValue   20.0
+  constraintPenaltyIncreaseRate   2.0
+
+  preComputeRiccatiTerms          true
+
+  useFeedbackPolicy               false
+
+  strategy                        LINE_SEARCH
+  lineSearch
+  {
+    minStepLength                 1e-2
+    maxStepLength                 1.0
+    hessianCorrectionStrategy     DIAGONAL_SHIFT
+    hessianCorrectionMultiple     1e-5
+  }
+}
+
+; Rollout settings
+rollout
+{
+  AbsTolODE                       1e-5
+  RelTolODE                       1e-3
+  timeStep                        0.015
+  integratorType                  ODE45
+  maxNumStepsPerSecond            10000
+  checkNumericalStability         false
+}
+
+mpc
+{
+  timeHorizon                     1.0  ; [s]
+  solutionTimeWindow              -1   ; maximum [s]
+  coldStart                       false
+
+  debugPrint                      false
+
+  mpcDesiredFrequency             100  ; [Hz]
+  mrtDesiredFrequency             400 ; [Hz]
+}
+
+initialState
+{
+   ;; Normalized Centroidal Momentum: [linear, angular] ;;
+   (0,0)  0.0     ; vcom_x
+   (1,0)  0.0     ; vcom_y
+   (2,0)  0.0     ; vcom_z
+   (3,0)  0.0     ; L_x / robotMass
+   (4,0)  0.0     ; L_y / robotMass
+   (5,0)  0.0     ; L_z / robotMass
+
+   ;; Base Pose: [position, orientation] ;;
+   (6,0)  0.0     ; p_base_x
+   (7,0)  0.0     ; p_base_y
+   (8,0)  0.73    ; p_base_z
+   (9,0)  0.0     ; theta_base_z
+   (10,0) 0.0     ; theta_base_y
+   (11,0) 0.0     ; theta_base_x
+
+   ;; Leg Joint Positions: [L, R] ;;
+   (12,0)  0.0       ; Hip_Z_L
+   (13,0)  0.0       ; Hip_X_L
+   (14,0) -0.4791    ; Hip_Y_L
+   (15,0)  0.83075   ; Knee_L
+   (16,0) -0.35165   ; Ankle_Y_L
+   (17,0)  0.0       ; Ankle_X_L
+   (18,0)  0.0       ; Hip_Z_R
+   (19,0)  0.0       ; Hip_X_R
+   (20,0) -0.4791    ; Hip_Y_R
+   (21,0)  0.83075   ; Knee_R
+   (22,0) -0.35165   ; Ankle_Y_R
+   (23,0)  0.0       ; Ankle_X_R
+}
+
+; standard state weight matrix
+Q
+{
+  scaling 1e+0
+
+  ;; Normalized Centroidal Momentum: [linear, angular] ;;
+  (0,0)   15.0     ; vcom_x
+  (1,1)   15.0     ; vcom_y
+  (2,2)   30.0     ; vcom_z
+  (3,3)   5.0      ; L_x / robotMass
+  (4,4)   10.0     ; L_y / robotMass
+  (5,5)   10.0     ; L_z / robotMass
+
+  ;; Base Pose: [position, orientation] ;;
+  (6,6)   500.0    ; p_base_x
+  (7,7)   500.0    ; p_base_y
+  (8,8)   500.0    ; p_base_z
+  (9,9)   100.0    ; theta_base_z
+  (10,10) 200.0    ; theta_base_y
+  (11,11) 200.0    ; theta_base_x
+
+  ;; Leg Joint Positions: [L, R] ;;
+  (12,12) 20.0     ; Hip_Z_L
+  (13,13) 20.0     ; Hip_X_L
+  (14,14) 20.0     ; Hip_Y_L
+  (15,15) 20.0     ; Knee_L
+  (16,16) 20.0     ; Ankle_Y_L
+  (17,17) 20.0     ; Ankle_X_L
+  (18,18) 20.0     ; Hip_Z_R
+  (19,19) 20.0     ; Hip_X_R
+  (20,20) 20.0     ; Hip_Y_R
+  (21,21) 20.0     ; Knee_R
+  (22,22) 20.0     ; Ankle_Y_R
+  (23,23) 20.0     ; Ankle_X_R
+}
+
+; control weight matrix
+R
+{
+  scaling 1e-3
+
+  ;; Feet Contact Forces: [L, R] ;;
+  (0,0)   1.0       ; left_force
+  (1,1)   1.0       ; left_force
+  (2,2)   1.0       ; left_force
+  (3,3)   1.0       ; left_torque
+  (4,4)   1.0       ; left_torque
+  (5,5)   1.0       ; left_torque
+  (6,6)   1.0       ; right_force
+  (7,7)   1.0       ; right_force
+  (8,8)   1.0       ; right_force
+  (9,9)   1.0       ; right_torque
+  (10,10) 1.0       ; right_torque
+  (11,11) 1.0       ; right_torque
+
+  ;; foot velocity relative to base: [L, R] (uses the Jacobian at nominal configuration) ;;
+  (12,12) 5000.0    ; x
+  (13,13) 5000.0    ; y
+  (14,14) 5000.0    ; z
+  (15,15) 5000.0    ; x
+  (16,16) 5000.0    ; y
+  (17,17) 5000.0    ; z
+  (18,18) 5000.0    ; x
+  (19,19) 5000.0    ; y
+  (20,20) 5000.0    ; z
+  (21,21) 5000.0    ; x
+  (22,22) 5000.0    ; y
+  (23,23) 5000.0    ; z
+}
+
+frictionConeSoftConstraint
+{
+  frictionCoefficient    0.5
+  
+  ; relaxed log barrier parameters
+  mu                     0.1
+  delta                  5.0
+}
