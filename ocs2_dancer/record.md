@@ -10,3 +10,12 @@
 - config/mpc/ task.info 关节初始角度和质心高度未修改
 - src/ LeggedRobotinterface.cpp: 加入了一些关于零力矩约束的计算，修改？
 
+### dancer_controllers
+
+
+### dancer_raisim
+未完成，dancer_controllers包的一个依赖包
+
+### dancer_description
+未导入urdf模型及相关的stl文件
+

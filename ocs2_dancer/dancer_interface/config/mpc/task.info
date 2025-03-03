@@ -161,18 +161,18 @@ initialState
    (11,0) 0.0     ; theta_base_x
 
    ;; Leg Joint Positions: [L, R] ;;
-   (12,0)  0.0       ; Hip_Z_L
-   (13,0)  0.0       ; Hip_X_L
-   (14,0) -0.4791    ; Hip_Y_L
-   (15,0)  0.83075   ; Knee_L
-   (16,0) -0.35165   ; Ankle_Y_L
-   (17,0)  0.0       ; Ankle_X_L
-   (18,0)  0.0       ; Hip_Z_R
-   (19,0)  0.0       ; Hip_X_R
-   (20,0) -0.4791    ; Hip_Y_R
-   (21,0)  0.83075   ; Knee_R
-   (22,0) -0.35165   ; Ankle_Y_R
-   (23,0)  0.0       ; Ankle_X_R
+   (12,0)   0.041147       ; left_hip_yaw
+   (13,0)   0.142089       ; left_hip_roll
+   (14,0)   0.978417       ; left_hip_pitch
+   (15,0)   1.242302       ; left_knee
+   (16,0)   0.546813       ; left_ankle_pitch
+   (17,0)   0.147888       ; left_ankle_roll
+   (18,0)  -0.041147       ; right_hip_yaw
+   (19,0)   0.142089       ; right_hip_roll
+   (20,0)   0.978417       ; right_hip_pitch
+   (21,0)   1.242302       ; right_knee
+   (22,0)  0.546813        ; right_ankle_pitch
+   (23,0)  0.147888        ; right_ankle_roll
 }
 
 ; standard state weight matrix

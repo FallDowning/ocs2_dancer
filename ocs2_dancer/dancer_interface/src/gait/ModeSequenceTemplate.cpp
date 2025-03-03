@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <ocs2_core/misc/LoadData.h>
 
 namespace ocs2 {
-namespace wukong4 {
+namespace dancer {
 
 /******************************************************************************************************/
 /******************************************************************************************************/
