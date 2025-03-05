@@ -6,8 +6,8 @@
 
 
 ### dancer_interface
-- config/command/ reference.info 关节初始角度和质心高度未修改
-- config/mpc/ task.info 关节初始角度和质心高度未修改
+- config/command/ reference.info 关节初始角度和质心高度未修改（已完成）
+- config/mpc/ task.info 关节初始角度和质心高度未修改（已完成）
 - src/ LeggedRobotinterface.cpp: 加入了一些关于零力矩约束的计算，修改？
 
 ### dancer_controllers
