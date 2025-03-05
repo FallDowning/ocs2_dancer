@@ -6,8 +6,8 @@
 
 
 ### dancer_interface
-- config/command/ reference.info 关节初始角度和质心高度未修改（已完成）
-- config/mpc/ task.info 关节初始角度和质心高度未修改（已完成）
+- config/command/ reference.info 关节初始角度和质心高度未修改
+- config/mpc/ task.info 关节初始角度和质心高度未修改
 - src/ LeggedRobotinterface.cpp: 加入了一些关于零力矩约束的计算，修改？
 
 ### dancer_controllers
@@ -20,6 +20,9 @@ launch 文件 的resource 文件地址为dancer_description的dae文件，还未
 未导入urdf模型及相关的stl文件 （已完成）
 
 
-## TODO（3.5）
-- 可以尝试编译项目+debug了 （在wukong4_control文件夹下）
+## MODIFIED & TODO（3.5）
+- 目前已经可以编译通过，但urdf模型存在一些问题，rviz尚未加载出来。
+- TODO：编译 & debug
+
+
 

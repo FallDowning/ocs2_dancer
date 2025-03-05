@@ -36,7 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <ocs2_core/Types.h>
 
 namespace ocs2 {
-namespace wukong4 {
+namespace dancer {
 
 struct ModelSettings {
     scalar_t positionErrorGain = 0.0;
@@ -59,5 +59,5 @@ struct ModelSettings {
 ModelSettings loadModelSettings(const std::string& filename, const std::string& fieldName = "model_settings",
                                 bool verbose = "true");
 
-}  // namespace wukong4
+}  // namespace dancer
 }  // namespace ocs2
