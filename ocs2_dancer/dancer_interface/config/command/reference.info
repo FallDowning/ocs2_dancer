@@ -1,7 +1,7 @@
 targetDisplacementVelocity          0.3;
 targetRotationVelocity              0.3;
 trajGenerationTimeInterval          2.0;
-comHeight                           0.73
+comHeight                           0.37
 
 defaultJointState
 {

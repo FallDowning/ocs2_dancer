@@ -11,7 +11,7 @@
     <!-- The reference related config file of the robot -->
     <arg name="referenceFile"     default="$(find dancer_interface)/config/command/reference.info"/>
     <!-- The URDF model of the robot -->
-    <arg name="urdfFile"          default="$(find dancer_description)/urdf/wukong4.urdf"/>
+    <arg name="urdfFile"          default="$(find dancer_description)/urdf/dancer.urdf"/>
     <!-- The file defining gait definition -->
     <arg name="gaitCommandFile"   default="$(find dancer_interface)/config/command/gait.info"/>
 
