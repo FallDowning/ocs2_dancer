@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+
+<launch>
+    <!-- Set the URDF file path -->
+    <arg name="urdfFile" default="$(find dancer_description)/urdf/dancer.urdf"/>
+    
+    <!-- Set the RViz config file path -->
+    <arg name="rvizconfig" default="$(find dancer_interface_ros)/rviz/dancer.rviz"/>
+
+    <!-- Load the URDF model as a parameter -->
+    <param name="robot_description" command="cat $(arg urdfFile)"/>
+
+    <!-- Launch RViz with the specified config -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rvizconfig)" output="screen"/>
+</launch>
+

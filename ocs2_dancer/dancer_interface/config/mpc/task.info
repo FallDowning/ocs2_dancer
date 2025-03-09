@@ -1,6 +1,6 @@
 centroidalModelType             0      // 0: FullCentroidalDynamics, 1: Single Rigid Body Dynamics
   
-wukong4_interface
+dancer_interface
 {
   verbose                               false  // show the loaded parameters
   useAnalyticalGradientsDynamics        false
@@ -161,7 +161,7 @@ initialState
    (11,0) 0.0     ; theta_base_x
 
    ;; Leg Joint Positions: [L, R] ;;
-   (12,0)   0.041147       ; left_hip_yaw
+   (12,0)  -0.041147       ; left_hip_yaw
    (13,0)   0.142089       ; left_hip_roll
    (14,0)   0.978417       ; left_hip_pitch
    (15,0)   1.242302       ; left_knee

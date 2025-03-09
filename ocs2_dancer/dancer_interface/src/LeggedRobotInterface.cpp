@@ -92,7 +92,7 @@ LeggedRobotInterface::LeggedRobotInterface(const std::string& taskFile, const st
   }
 
   bool verbose;
-  loadData::loadCppDataType(taskFile, "wukong4_interface.verbose", verbose);
+  loadData::loadCppDataType(taskFile, "dancer_interface.verbose", verbose);
 
   // load setting from loading file
   modelSettings_ = loadModelSettings(taskFile, "model_settings", verbose);
@@ -139,7 +139,7 @@ void LeggedRobotInterface::setupOptimalConrolProblem(const std::string& taskFile
 
   // Dynamics
   bool useAnalyticalGradientsDynamics = false;
-  loadData::loadCppDataType(taskFile, "wukong4_interface.useAnalyticalGradientsDynamics", useAnalyticalGradientsDynamics);
+  loadData::loadCppDataType(taskFile, "dancer_interface.useAnalyticalGradientsDynamics", useAnalyticalGradientsDynamics);
   std::unique_ptr<SystemDynamicsBase> dynamicsPtr;
   if (useAnalyticalGradientsDynamics) {
     throw std::runtime_error("[LeggedRobotInterface::setupOptimalConrolProblem] The analytical dynamics class is not yet implemented!");
@@ -162,7 +162,7 @@ void LeggedRobotInterface::setupOptimalConrolProblem(const std::string& taskFile
   // problemPtr_->stateCostPtr->add("FootPlacementCost", createFootPlacementCost(barrierPenaltyConfig));
 
   bool useAnalyticalGradientsConstraints = false;
-  loadData::loadCppDataType(taskFile, "wukong4_interface.useAnalyticalGradientsConstraints", useAnalyticalGradientsConstraints);
+  loadData::loadCppDataType(taskFile, "dancer_interface.useAnalyticalGradientsConstraints", useAnalyticalGradientsConstraints);
   for (size_t i = 0; i < centroidalModelInfo_.numSixDofContacts; i++) {
     const std::string& footName = modelSettings_.contactNames6DoF[i];
 
@@ -243,7 +243,10 @@ std::shared_ptr<GaitSchedule> LeggedRobotInterface::loadGaitSchedule(const std::
 /******************************************************************************************************/
 /******************************************************************************************************/
 matrix_t LeggedRobotInterface::initializeInputCostWeight(const std::string& taskFile, const CentroidalModelInfo& info) {
+
   const size_t totalContactDim = 6 * info.numSixDofContacts;
+
+  std::cout << "numSixDofContacts:" << info.numSixDofContacts << std::endl;
 
   vector_t initialState(centroidalModelInfo_.stateDim);
   loadData::loadEigenMatrix(taskFile, "initialState", initialState);
@@ -264,7 +267,13 @@ matrix_t LeggedRobotInterface::initializeInputCostWeight(const std::string& task
         jacobianWorldToContactPointInWorldFrame.block(0, 6, 6, info.actuatedDofNum);
   }
 
+  std::cout << "before errors happen" << std::endl;
   matrix_t R_taskspace(totalContactDim + totalContactDim, totalContactDim + totalContactDim);
+  std::cout << "Attempting to load matrix R from: " << taskFile << std::endl;
+  // use for debugging
+  std::cout << "totalContactDim: " << totalContactDim << std::endl;
+  std::cout << "Matrix R_taskspace size: " << R_taskspace.rows() << "x" << R_taskspace.cols() << std::endl;
+
   loadData::loadEigenMatrix(taskFile, "R", R_taskspace);
 
   matrix_t R = matrix_t::Zero(info.inputDim, info.inputDim);
@@ -402,5 +411,5 @@ std::unique_ptr<StateInputConstraint> LeggedRobotInterface::getNormalVelocityCon
 //   return std::unique_ptr<StateCost>(new switched_model::FootPlacementCost(barrierPenaltyConfig));
 // }
 
-}  // namespace wukong4
+}  // namespace dancer
 }  // namespace ocs2

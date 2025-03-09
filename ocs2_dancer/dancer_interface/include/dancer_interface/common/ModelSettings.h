@@ -52,7 +52,7 @@ struct ModelSettings {
     std::vector<std::string> jointNames{"left_hip_yaw",     "left_hip_roll",   "left_hip_pitch",   "left_knee",
                                         "left_ankle_pitch", "left_ankle_roll", "right_hip_yaw",    "right_hip_roll",
                                         "right_hip_pitch",  "right_knee",      "right_ankle_pitch", "right_ankle_roll"};
-    std::vector<std::string> contactNames6DoF{};
+    std::vector<std::string> contactNames6DoF{"right_foot","left_foot"};
     std::vector<std::string> contactNames3DoF{};
 };
 

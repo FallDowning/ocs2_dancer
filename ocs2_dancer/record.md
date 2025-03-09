@@ -20,9 +20,9 @@ launch 文件 的resource 文件地址为dancer_description的dae文件，还未
 未导入urdf模型及相关的stl文件 （已完成）
 
 
-## MODIFIED & TODO（3.5）
-- 目前已经可以编译通过，但urdf模型存在一些问题，rviz尚未加载出来。
-- TODO：编译 & debug
+## TODO（3.5）
+- 可以尝试编译项目+debug了 （在wukong4_control文件夹下）
 
-
-
+## Modified（3.9）
+- 修改了一些程序bug，导入了新的urdf模型，目前urdf模型还存在一些问题（collision是stl文件的情况下无法加载）（已解决）
+- 目前存在p gain 不等于自由度的报错

@@ -5,7 +5,7 @@ comHeight                           0.37
 
 defaultJointState
 {
-   (0,0)   0.041147       ; left_hip_yaw
+   (0,0)  -0.041147       ; left_hip_yaw
    (1,0)   0.142089       ; left_hip_roll
    (2,0)   0.978417       ; left_hip_pitch
    (3,0)   1.242302       ; left_knee

@@ -1,1051 +1,961 @@
 <?xml version="1.0" ?>
-<robot name='human'>
-    <link name='chest'>
-        <inertial>
-            <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.000184 -0.004516 -0.057124 "/>
-            <mass value="0.88192504598295396"/>
-            <inertia ixx="0.00046345121044283501"  ixy="-1.69677482344443e-08"  ixz="3.1548801144944602e-07"  iyy="0.000627560669282691"  iyz="-2.8050692226923402e-06"  izz="0.00057015264499342302" />
-        </inertial>
-        <collision name='chest_box'>
-            <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.005000 -0.050000 "/>
-            <geometry>
-            <box size="0.1125 0.0975 0.14" />
-            </geometry>
-        </collision>
-        <collision name='chest_cylinder'>
-            <origin rpy="0.000000 1.570796 0.000000 " xyz="0.000000 -0.075699 0.038000 "/>
-            <geometry>
-            <cylinder radius="0.008"  length="0.1146" />
-            </geometry>
-        </collision>
-        <visual name='chest_visual'>
-        <origin rpy="-1.570796327 0.0 0.0" xyz="0.0 0.0 0.0"/>
-            <geometry>
-            <mesh filename="meshes/chest.STL" />
-            </geometry>
-        </visual>
-    </link>
-    <joint name='head_yaw' type='fixed'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0 0.0134 0.020750000000000046"/>
-        <parent link="chest" />
-        <child link="neck" />
-        <axis xyz="0 0 1"  />
-        <limit lower="-3.141592654"  upper="3.141592654"  effort="3"  velocity="20"  />
-        <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='neck'>
-        <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.000076 0.000000 0.026023 "/>
-        <mass value="0.054959742050374599"/>
-        <inertia ixx="1.1553114985236599e-05"  ixy="-6.3224562597767901e-12"  ixz="1.10127762796851e-07"  iyy="1.38245264991759e-05"  iyz="-6.4352650730185303e-12"  izz="1.0034260801326499e-05" />
-        </inertial>
-        <collision name='neck_collision1'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.000000 0.030400 "/>
-        <geometry>
-            <box size="0.0302 0.0356 0.0396" />
-        </geometry>
-        </collision>
-        <collision name='neck_collision2'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.000027 0.033190 "/>
-        <geometry>
-            <box size="0.0355 0.0243864 0.0451795" />
-        </geometry>
-        </collision>
-        <collision name='neck_collision3'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.000000 0.009500 "/>
-        <geometry>
-            <box size="0.0342 0.0355 0.015" />
-        </geometry>
-        </collision>
-        <visual name='neck_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-            <mesh filename="meshes/neck.STL" />
-        </geometry>
-        <material name='neck_material'>
-            <rgba>1 1 1 1</rgba>
-        </material>
-        </visual>
-    </link>
-    <joint name='head_pitch' type='fixed'>
-        <origin rpy="1.570796 -1.491213 -1.570796 " xyz="-0.018750 0.000000 0.043800 "/>
-        <parent link="neck" />
-        <child link="head" />
-        <axis xyz="-4.5536491244391186e-18 0 1"  />
-        <limit lower="-3.141592654"  upper="3.141592654"  effort="3"  velocity="20"  />
-        <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='head'>
-        <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.051352 0.005381 -0.018302 "/>
-        <mass value="0.080370395509901299"/>
-        <inertia ixx="2.0782839377867802e-05"  ixy="-5.7039686565431499e-07"  ixz="-6.5737404978777497e-09"  iyy="4.5624129183850597e-05"  iyz="1.34009185452834e-08"  izz="3.6502070438585903e-05" />
-        </inertial>
-        <collision name='head_collision1'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.058663 0.006591 -0.018500 "/>
-        <geometry>
-            <sphere radius="0.0305397"   />
-        </geometry>
-        </collision>
-        <collision name='head_collision2'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.051820 0.007006 -0.018500 "/>
-        <geometry>
-            <sphere radius="0.0284086"   />
-        </geometry>
-        </collision>
-        <collision name='head_collision3'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.056195 -0.004012 -0.018500 "/>
-        <geometry>
-            <sphere radius="0.0349883"   />
-        </geometry>
-        </collision>
-        <visual name='head_visual'>
-        <origin rpy="-1.570796327  0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-            <mesh filename="meshes/head.STL" />
-        </geometry>
-        <material name='head_material'>
-            <rgba>1 1 1 1</rgba>
-        </material>
-        </visual>
-    </link>
-    <joint name='left_arm_upper' type='revolute'>
-        <origin rpy="3.141593 1.570796 0.000000 " xyz="-0.074700 0.013400 0.000000 "/>
-        <parent link="chest" />
-        <child link="left_arm" />
-        <axis xyz="0 0 -1"  />
-        <limit lower="-3.141592654"  upper="3.141592654"  effort="7"  velocity="20"  />
-        <dynamics  damping="0.0362"  friction="0.0078"  />
-    </joint>
-    <link name='left_arm'>
-        <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.080763 0.001886 0.029109 "/>
-        <mass value="0.140880482426088"/>
-        <inertia ixx="2.0746461598375701e-05"  ixy="-2.8659021101734599e-11"  ixz="-6.7417528894394298e-06"  iyy="0.00012310039515784201"  iyz="-1.5929639449771301e-07"  izz="0.00011999284945507099" />
-        </inertial>
-        <collision name='left_arm_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.080500 0.000000 0.029000 "/>
-        <geometry>
-            <box size="0.1271 0.048 0.028" />
-        </geometry>
-        </collision>
-        <visual name='left_arm_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-            <geometry>
-                <mesh filename="meshes/left_arm.STL" />
-            </geometry>
-            <material name='left_arm_material'>
-                <rgba>1 1 1 1</rgba>
-            </material>
-        </visual>
-    </link>
-    <joint name='left_arm_lower' type='revolute'>
-        <origin rpy="0.0 0.0 0.0 " xyz="0.136000 0 0.04955"/>
-        <parent link="left_arm" />
-        <child link="left_hand" />
-        <axis xyz="0 0 -1"  />
-        <limit lower="-3.141592654"  upper="3.141592654"  effort="3"  velocity="20"  />
-        <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='left_hand'>
-        <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.063649 -0.000000 0.001319 "/>
-        <mass value="0.024044269196268502"/>
-        <inertia ixx="1.94691318232501e-06"  ixy="1.9798400242031498e-12"  ixz="1.70538796340321e-12"  iyy="4.9981652993954002e-05"  iyz="7.0639482370012499e-13"  izz="5.1889171468805399e-05" />
-        </inertial>
-        <collision name='left_hand_end_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.135000 0.000000 0.001500 "/>
-        <geometry>
-            <cylinder radius="0.02"  length="0.003" />
-        </geometry>
-        </collision>
-        <collision name='left_hand_base_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.000000 0.000500 "/>
-        <geometry>
-            <cylinder radius="0.0146"  length="0.005" />
-        </geometry>
-        </collision>
-        <collision name='left_hand_connection_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.060122 0.000000 0.001500 "/>
-        <geometry>
-            <box size="0.120244 0.027 0.003" />
-        </geometry>
-        </collision>
-        <visual name='left_hand_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-            <mesh filename="meshes/left_hand.STL" />
-        </geometry>
-        <material name='left_hand_material'>
-            <rgba>1 1 1 1</rgba>
-        </material>
-        </visual>
-    </link>
-    <joint name='right_arm_upper' type='revolute'>
-        <origin rpy="0.000000 1.570796 0.000000 " xyz="0.074700 0.013400 0.000000 "/>
-        <parent link="chest" />
-        <child link="right_arm" />
-        <axis xyz="0 0 1"  />
-        <limit lower="-3.141592654"  upper="3.141592654"  effort="7"  velocity="20"  />
-        <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='right_arm'>
-        <inertial>
-            <origin rpy="0.000000 0.000000 0.000000 " xyz="0.080812 -0.001871 0.029108 "/>
-            <mass value="0.140880482426088"/>
-            <inertia ixx="2.0746461598375701e-05"  ixy="3.0340088781543498e-07"  ixz="-6.7417528894395102e-06"  iyy="0.00012310039515784201"  iyz="1.5929818113849301e-07"  izz="0.00011999284945507099" />
-        </inertial>
-        <collision name='right_arm_collision'>
-            <origin rpy="0.000000 0.000000 0.000000 " xyz="0.080500 0.000000 0.029000 "/>
-            <geometry>
-            <box size="0.1271 0.048 0.028" />
-            </geometry>
-        </collision>
-        <visual name='right_arm_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-            <geometry>
-            <mesh filename="meshes/right_arm.STL" />
-            </geometry>
-            <material name='right_arm_material'>
-            <rgba>1 1 1 1</rgba>
-            </material>
-        </visual>
-    </link>
-    <joint name='right_arm_lower' type='revolute'>
-        <origin rpy="0.000000 0.0 0.000000 " xyz="0.136000 0 0.05255 "/>
-        <parent link="right_arm" />
-        <child link="right_hand" />
-        <axis xyz="0 0 1"  />
-        <limit lower="-3.141592654"  upper="3.141592654"  effort="3"  velocity="20"  />
-        <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='right_hand'>
-      <inertial>
-          <origin rpy="0.000000 0.000000 0.000000 " xyz="0.063649 0.000000 -0.001681 "/>
-          <mass value="0.024044269196268502"/>
-          <inertia ixx="1.94691318232501e-06"  ixy="-1.9798400205047599e-12"  ixz="1.70538796039851e-12"  iyy="4.9981652993954097e-05"  iyz="-7.0639482380154195e-13"  izz="5.1889171468805501e-05" />
-      </inertial>
-      <collision name='right_hand_end_collision'>
-          <origin rpy="0.000000 0.000000 0.000000 " xyz="0.135000 0.000000 -0.001500 "/>
-          <geometry>
-          <cylinder radius="0.02"  length="0.003" />
-          </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_hand_base_collision'>
-          <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.000000 -0.002500 "/>
-          <geometry>
-          <cylinder radius="0.0146"  length="0.005" />
-          </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_hand_connection_collision'>
-          <origin rpy="0.000000 0.000000 0.000000 " xyz="0.060122 0.000000 -0.001500 "/>
-          <geometry>
-          <box size="0.120244 0.027 0.003" />
-          </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='right_hand_visual'>
-              <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-          <geometry>
-          <mesh filename="meshes/right_hand.STL" />
-          </geometry>
-          <material name='right_hand_material'>
-          <rgba>1 1 1 1</rgba>
-          </material>
-      </visual>
-    </link>
-    <joint name='left_hip_yaw' type='revolute'>
-      <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.044999999999999998 0.0133599999999985 -0.16994999999999999 "/>
-      <parent link="chest" />
-      <child link="left_leg_yaw" />
-      <axis xyz="0 0 -1"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="7"  velocity="20"  />
-      <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='left_leg_yaw'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.003285 -0.029821 "/>
-        <mass value="0.058662024462932297"/>
-        <inertia ixx="3.0496686582707501e-05"  ixy="-8.4677743033588304e-14"  ixz="8.5574380306308406e-14"  iyy="1.16928645977672e-05"  iyz="-9.4199503165967801e-08"  izz="3.04113434807083e-05" />
-      </inertial>
-      <collision name='left_leg_yaw_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.005150 -0.022500 "/>
-        <geometry>
-          <box size="0.041 0.0637 0.003" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='left_leg_yaw_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/left_leg_yaw.STL" />
-        </geometry>
-        <material name='left_leg_yaw_material'>
-          <rgba>0.990196109 1 1 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='left_hip_roll' type='revolute'>
-      <origin rpy="0.000000 0.000000 0.000000 " xyz="0.0 -0.0292 -0.055 "/>
-      <parent link="left_leg_yaw" />
-      <child link="left_leg_roll" />
-      <axis xyz="0 1 0"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="7"  velocity="20"  />
-      <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='left_leg_roll'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000025 0.010978 -0.014084 "/>
-        <mass value="0.17675216665704899"/>
-        <inertia ixx="6.1790335519862398e-05"  ixy="-9.41308133856575e-10"  ixz="-2.1169089800936899e-07"  iyy="6.5889939337192494e-05"  iyz="-2.14817110544029e-07"  izz="3.9028076120466002e-05" />
-      </inertial>
-      <collision name='left_leg_roll_upper_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.030650 -0.018117 "/>
-        <geometry>
-          <box size="0.0502 0.0643 0.0652552" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_roll_lower_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 -0.039750 -0.014838 "/>
-        <geometry>
-          <box size="0.028997 0.0035 0.0553928" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_roll_down_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000014 -0.019000 -0.017550 "/>
-        <geometry>
-          <box size="0.0403884 0.038 0.0611006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='left_leg_roll_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/left_leg_roll.STL" />
-        </geometry>
-        <material name='left_leg_roll_material'>
-          <rgba>0.313725501 0.313725501 0.313725501 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='left_hip_pitch' type='revolute'>
-      <origin rpy="-0.340598 1.565932 2.800991 " xyz="-0.028999695 0.0292 0.000132953 "/>
-      <parent link="left_leg_roll" />
-      <child link="left_leg_pitch" />
-      <axis xyz="0 0 -1"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="10"  velocity="20"  />
-      <dynamics damping="0.0414"  friction="0.1179" />
-    </joint>
-    <link name='left_leg_pitch'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.037597 -0.000000 -0.027982 "/>
-        <mass value="0.027887725075667901"/>
-        <inertia ixx="2.41537468742227e-06"  ixy="3.2274965794789498e-14"  ixz="4.7964487075471796e-12"  iyy="1.14633756275734e-05"  iyz="7.7934947477887403e-15"  izz="1.3716039319153201e-05" />
-      </inertial>
-      <collision name='left_leg_pitch_big_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.114750 0.000000 -0.028992 "/>
-        <geometry>
-          <box size="0.0595 0.029 0.0459848" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_pitch_p_one0_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.111950 0.000000 -0.012750 "/>
-        <geometry>
-          <box size="0.0651 0.029 0.0015" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_pitch_p_one1_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.111950 0.000000 -0.012750 "/>
-        <geometry>
-          <box size="0.0539 0.0402 0.0015" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_pitch_p_two0_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.111950 0.000000 -0.045250 "/>
-        <geometry>
-          <box size="0.0651 0.029 0.0015" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_pitch_p_two1_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.111950 0.000000 -0.045250 "/>
-        <geometry>
-          <box size="0.0539 0.0402 0.0015" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='left_leg_pitch_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/left_leg_pitch.STL" />
-        </geometry>
-        <material name='left_leg_pitch_material'>
-          <rgba>0.941176474 0.941176474 0.941176474 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='left_knee' type='revolute'>
-      <origin rpy="0 0 0 " xyz="0.130023677484126 -0.000211229839968 -0.004903944887406 "/>
-      <parent link="left_leg_pitch" />
-      <child link="left_leg_knee" />
-      <axis xyz="0 0 1"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="10"  velocity="20"  />
-      <dynamics damping="0.0347 "  friction="0.0843" />
-    </joint>
-    <link name='left_leg_knee'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.084360 -0.000000 -0.024128 "/>
-        <mass value="0.0328192125267944"/>
-        <inertia ixx="1.9489049933254499e-06"  ixy="2.35500388345378e-20"  ixz="-4.79645500496334e-12"  iyy="4.3073341622455502e-05"  iyz="9.3300803217153103e-22"  izz="4.4968042537653101e-05" />
-      </inertial>
-      <collision name='left_leg_knee_collision0'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.000000 -0.049750 "/>
-        <geometry>
-          <cylinder radius="0.014"  length="0.0055" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_knee_collision1'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.000000 0.003000 "/>
-        <geometry>
-          <cylinder radius="0.014"  length="0.0055" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_knee_collision2'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.130360 0.000000 -0.049750 "/>
-        <geometry>
-          <cylinder radius="0.014"  length="0.0055" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_knee_collision3'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.130360 0.000000 0.003000 "/>
-        <geometry>
-          <cylinder radius="0.014"  length="0.0055" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='left_leg_knee_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/left_leg_knee.STL" />
-        </geometry>
-        <material name='left_leg_knee_material'>
-          <rgba>0.941176474 0.941176474 0.941176474 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='left_ankle_pitch' type='revolute'>
-      <origin rpy="2.96537 1.58011 -0.174599 " xyz="0.129998462179975 -0.000211229839968 0.000595997311238 "/>
-      <parent link="left_leg_knee" />
-      <child link="left_leg_ankle" />
-      <axis xyz="1 0 0"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="10"  velocity="20"  />
-      <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='left_leg_ankle'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.023591 -0.016018 0.014280 "/>
-        <mass value="0.173948205448793"/>
-        <inertia ixx="6.1525563546113303e-05"  ixy="-4.3529887410332497e-11"  ixz="1.07316479776985e-07"  iyy="6.5767469559665899e-05"  iyz="-1.9005632960375801e-07"  izz="3.8828440030109099e-05" />
-      </inertial>
-      <collision name='left_leg_ankle_small_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.023508 -0.043500 0.014752 "/>
-        <geometry>
-          <box size="0.0289848 0.041 0.0554962" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_small11_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.023500 -0.058250 0.017550 "/>
-        <geometry>
-          <box size="0.0290000 0.0045 0.0611" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_small12_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.023500 -0.058250 0.017550 "/>
-        <geometry>
-          <box size="0.0402 0.0045 0.0499" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_small21_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.023500 -0.028739 0.017550 "/>
-        <geometry>
-          <box size="0.029 0.0045 0.0611" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_small22_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.023500 -0.028739 0.017550 "/>
-        <geometry>
-          <box size="0.0402 0.0045 0.0499" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_big_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.023500 0.000000 0.015250 "/>
-        <geometry>
-          <box size="0.046 0.029 0.0595" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_big11_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.038750 0.000000 0.018050 "/>
-        <geometry>
-          <box size="0.0035 0.029 0.0651" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_big12_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.038750 0.000000 0.018050 "/>
-        <geometry>
-          <box size="0.0035 0.0402 0.0539" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_big21_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.008000 0.000000 0.018050 "/>
-        <geometry>
-          <box size="0.003 0.029 0.0651" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_big22_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.008000 0.000000 0.018050 "/>
-        <geometry>
-          <box size="0.0035 0.0402 0.0539" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_leg_ankle_upper_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.023500 0.027850 0.007000 "/>
-        <geometry>
-          <box size="0.039 0.0027 0.03" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='left_leg_ankle_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/left_leg_ankle.STL" />
-        </geometry>
-        <material name='left_leg_ankle_material'>
-          <rgba>0.367647082 0.367647082 0.367647082 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='left_ankle_roll' type='revolute'>
-      <origin rpy="0.0 0.0 0.0 " xyz="0.023387 -0.069538 -0.000113445 "/>
-      <parent link="left_leg_ankle" />
-      <child link="left_foot" />
-      <axis xyz="0 -1 0"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="7"  velocity="20"  />
-      <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='left_foot'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.012987 0.068288 -0.035868 "/>
-        <mass value="0.144176668751163"/>
-        <inertia ixx="0.00014149565462157499"  ixy="-1.52740202739877e-09"  ixz="1.9349728888557201e-07"  iyy="5.0645258641957197e-05"  iyz="-3.3396462913510601e-07"  izz="0.000183700741709755" />
-      </inertial>
-      <collision name='left_foot_box1_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.016188 0.066000 -0.040926 "/>
-        <geometry>
-          <box size="0.09 0.126 0.016" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_box2_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.016211 0.066023 -0.040926 "/>
-        <geometry>
-          <box size="0.0659544 0.149954 0.012" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_box3_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.016188 0.066000 -0.040926 "/>
-        <geometry>
-          <box size="0.087 0.147 0.006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_box4_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.016172 0.141086 -0.037589 "/>
-        <geometry>
-          <box size="0.09 0.00582764 0.0186744" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <!-- <collision name='left_foot_cylinder11_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.022706 0.135500 -0.057119 "/>
-        <geometry>
-          <cylinder radius="0.003"  length="0.014" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_cylinder12_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.022706 0.135500 -0.047119 "/>
-        <geometry>
-          <cylinder radius="0.0055"  length="0.006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_cylinder21_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.055293 0.135500 -0.057119 "/>
-        <geometry>
-          <cylinder radius="0.003"  length="0.014" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_cylinder22_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.055293 0.135500 -0.047119 "/>
-        <geometry>
-          <cylinder radius="0.0055"  length="0.006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_cylinder31_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.022706 -0.003500 -0.057119 "/>
-        <geometry>
-          <cylinder radius="0.003"  length="0.014" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_cylinder32_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.022706 -0.003500 -0.047119 "/>
-        <geometry>
-          <cylinder radius="0.0055"  length="0.006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_cylinder41_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.055293 -0.003500 -0.057119 "/>
-        <geometry>
-          <cylinder radius="0.003"  length="0.014" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='left_foot_cylinder42_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.055293 -0.003500 -0.047119 "/>
-        <geometry>
-          <cylinder radius="0.0055"  length="0.006" />
-        </geometry>
-          <sdf resolution = "512"/> -->
-      <!-- </collision> -->
-      <visual name='left_foot_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/left_foot.STL" />
-        </geometry>
-        <material name='left_foot_material'>
-          <rgba>1 1 1 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='right_hip_yaw' type='revolute'>
-      <origin rpy="0.000000 0.000000 0.000000 " xyz="0.045000 0.013360 -0.169950 "/>
-      <parent link="chest" />
-      <child link="right_leg_yaw" />
-      <axis xyz="0 0 -1"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="7"  velocity="20"  />
-      <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='right_leg_yaw'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.000000 0.003285 -0.029821 "/>
-        <mass value="0.0586620244629322"/>
-        <inertia ixx="3.0496686583123601e-05"  ixy="-3.16154434574983e-14"  ixz="-1.34169348176914e-13"  iyy="1.16928645977672e-05"  iyz="-9.4199503115753094e-08"  izz="3.0411343480292098e-05" />
-      </inertial>
-      <collision name='right_leg_yaw_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.005150 -0.022500 "/>
-        <geometry>
-          <box size="0.041 0.0637 0.003" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='right_leg_yaw_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/right_leg_yaw.STL" />
-        </geometry>
-        <material name='right_leg_yaw_material'>
-          <rgba>0.990196109 1 1 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='right_hip_roll' type='revolute'>
-      <origin rpy="0.000000 -0.006478 0.000000 " xyz="0.0 -0.0292 -0.055 "/>
-      <parent link="right_leg_yaw" />
-      <child link="right_leg_roll" />
-      <axis xyz="0 -1 0"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="7"  velocity="20"  />
-      <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='right_leg_roll'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000090 0.010978 -0.014084 "/>
-        <mass value="0.176752167034151"/>
-        <inertia ixx="6.1791798147460997e-05"  ixy="4.3532300340763102e-11"  ixz="-1.07327270209975e-07"  iyy="6.5889939430164294e-05"  iyz="-2.14819182994814e-07"  izz="3.9026613600567697e-05" />
-      </inertial>
-      <collision name='right_leg_roll_upper_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.030650 -0.018117 "/>
-        <geometry>
-          <box size="0.0502 0.0643 0.0652552" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_roll_lower_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 -0.039750 -0.014838 "/>
-        <geometry>
-          <box size="0.028997 0.0035 0.0553928" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_roll_down_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000014 -0.019000 -0.017550 "/>
-        <geometry>
-          <box size="0.0403884 0.038 0.0611006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='right_leg_roll_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/right_leg_roll.STL" />
-        </geometry>
-        <material name='right_leg_roll_material'>
-          <rgba>0.313725501 0.313725501 0.313725501 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='right_hip_pitch' type='revolute'>
-      <origin rpy="1.57078 1.56703  1.5708 " xyz="0.029 0.0292 0 "/>
-      <parent link="right_leg_roll" />
-      <child link="right_leg_pitch" />
-      <axis xyz="0 0 1"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="10"  velocity="20"  />
-      <dynamics damping="0.0414"  friction="0.1179" />
-    </joint>
-    <link name='right_leg_pitch'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.037597 0.000000 -0.030018 "/>
-        <mass value="0.027887725075667901"/>
-        <inertia ixx="2.4153746871926199e-06"  ixy="-7.4854894278663796e-14"  ixz="-4.7964209833556204e-12"  iyy="1.14633756278031e-05"  iyz="1.8075310725767399e-14"  izz="1.3716039319153301e-05" />
-      </inertial>
-      <collision name='right_leg_pitch_big_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.114750 0.000000 -0.028992 "/>
-        <geometry>
-          <box size="0.0595 0.029 0.0459848" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_pitch_p_one0_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.111950 0.000000 -0.012750 "/>
-        <geometry>
-          <box size="0.0651 0.029 0.0015" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_pitch_p_one1_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.111950 0.000000 -0.012750 "/>
-        <geometry>
-          <box size="0.0539 0.0402 0.0015" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_pitch_p_two0_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.111950 0.000000 -0.045250 "/>
-        <geometry>
-          <box size="0.0651 0.029 0.0015" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_pitch_p_two1_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.111950 0.000000 -0.045250 "/>
-        <geometry>
-          <box size="0.0539 0.0402 0.0015" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='right_leg_pitch_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/right_leg_pitch.STL" />
-        </geometry>
-        <material name='right_leg_pitch_material'>
-          <rgba>0.941176474 0.941176474 0.941176474 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='right_knee' type='revolute'>
-      <origin rpy="0.0 0.0 0.0 " xyz="0.130031979223655 0.000489901482115 -0.004657722159670 "/>
-      <parent link="right_leg_pitch" />
-      <child link="right_leg_knee" />
-      <axis xyz="-1.8970996919654565e-17 0 -1"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="10"  velocity="20"  />
-      <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='right_leg_knee'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.084360 -0.000000 -0.022872 "/>
-        <mass value="0.0328192125267944"/>
-        <inertia ixx="1.9489049933254499e-06"  ixy="-1.4998438866811501e-20"  ixz="4.7964550293966002e-12"  iyy="4.3073341622455502e-05"  iyz="4.6518569698450903e-22"  izz="4.4968042537653101e-05" />
-      </inertial>
-      <collision name='right_leg_knee_collision0'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.000000 -0.049750 "/>
-        <geometry>
-          <cylinder radius="0.014"  length="0.0055" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_knee_collision1'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.000000 0.000000 0.003000 "/>
-        <geometry>
-          <cylinder radius="0.014"  length="0.0055" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_knee_collision2'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.130360 0.000000 -0.049750 "/>
-        <geometry>
-          <cylinder radius="0.014"  length="0.0055" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_knee_collision3'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.130360 0.000000 0.003000 "/>
-        <geometry>
-          <cylinder radius="0.014"  length="0.0055" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='right_leg_knee_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/right_leg_knee.STL" />
-        </geometry>
-        <material name='right_leg_knee_material'>
-          <rgba>0.941176474 0.941176474 0.941176474 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='right_ankle_pitch' type='revolute'>
-      <origin rpy="1.56716 -1.56838 -1.57091 " xyz="0.129976266544291 0.000489901482115 0.003942097378979 "/>
-      <parent link="right_leg_knee" />
-      <child link="right_leg_ankle" />
-      <axis xyz="1 0 0"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="10"  velocity="20"  />
-      <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='right_leg_ankle'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.026509 -0.016018 0.014280 "/>
-        <mass value="0.17394820501059499"/>
-        <inertia ixx="6.1525563468979203e-05"  ixy="-4.3542375080641399e-11"  ixz="1.0731643525882001e-07"  iyy="6.5767469449289794e-05"  iyz="-1.90056299790816e-07"  izz="3.8828439931667398e-05" />
-      </inertial>
-      <collision name='right_leg_ankle_small_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.026608 -0.043500 0.014752 "/>
-        <geometry>
-          <box size="0.0289848 0.041 0.0554962" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_small11_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.026600 -0.058250 0.017550 "/>
-        <geometry>
-          <box size="0.0290000 0.0045 0.0611" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_small12_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.026600 -0.058250 0.017550 "/>
-        <geometry>
-          <box size="0.0402 0.0045 0.0499" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_small21_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.026600 -0.028739 0.017550 "/>
-        <geometry>
-          <box size="0.029 0.0045 0.0611" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_small22_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.026600 -0.028739 0.017550 "/>
-        <geometry>
-          <box size="0.0402 0.0045 0.0499" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_big_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.026600 0.000000 0.015250 "/>
-        <geometry>
-          <box size="0.046 0.029 0.0595" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_big11_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.041850 0.000000 0.018050 "/>
-        <geometry>
-          <box size="0.0035 0.029 0.0651" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_big12_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.041850 0.000000 0.018050 "/>
-        <geometry>
-          <box size="0.0035 0.0402 0.0539" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_big21_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.011100 0.000000 0.018050 "/>
-        <geometry>
-          <box size="0.003 0.029 0.0651" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_big22_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.011100 0.000000 0.018050 "/>
-        <geometry>
-          <box size="0.0035 0.0402 0.0539" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_leg_ankle_upper_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.026600 0.027850 0.007000 "/>
-        <geometry>
-          <box size="0.039 0.0027 0.03" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='right_leg_ankle_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/right_leg_ankle.STL" />
-        </geometry>
-        <material name='right_leg_ankle_material'>
-          <rgba>1 1 1 1</rgba>
-        </material>
-      </visual>
-    </link>
-    <joint name='right_ankle_roll' type='revolute'>
-      <origin rpy="3.1392 3.13511 3.14158 " xyz="-0.0267659  -0.0694361 -0.000164943"/>
-      <parent link="right_leg_ankle" />
-      <child link="right_foot" />
-      <axis xyz="0 -1 0"  />
-      <limit lower="-3.141592654"  upper="3.141592654"  effort="7"  velocity="20"  />
-      <dynamics  damping="0.0362"  friction="0.0078" />
-    </joint>
-    <link name='right_foot'>
-      <inertial>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.012889344838027599 0.068349573591404394 -0.036000558661549199"/>
-        <mass value="0.14342863960313501"/>
-        <inertia ixx="0.00014133738462663599"  ixy="3.7013888509899199e-12"  ixz="-2.0333584432894299e-12"  iyy="5.0459643793834899e-05"  iyz="-3.2037887084776298e-07"  izz="0.000183618491010819" />
-      </inertial>
-      <collision name='right_foot_box1_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.016188 0.066000 -0.040926 "/>
-        <geometry>
-          <box size="0.09 0.126 0.016" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_box2_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.016211 0.066023 -0.040926 "/>
-        <geometry>
-          <box size="0.0659544 0.149954 0.012" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_box3_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.016188 0.066000 -0.040926 "/>
-        <geometry>
-          <box size="0.087 0.147 0.006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_box4_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.016172 0.141086 -0.037589 "/>
-        <geometry>
-          <box size="0.09 0.00582764 0.0186744" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_cylinder11_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.022706 0.135500 -0.057119 "/>
-        <geometry>
-          <cylinder radius="0.003"  length="0.014" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_cylinder12_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.022706 0.135500 -0.047119 "/>
-        <geometry>
-          <cylinder radius="0.0055"  length="0.006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_cylinder21_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.055293 0.135500 -0.057119 "/>
-        <geometry>
-          <cylinder radius="0.003"  length="0.014" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_cylinder22_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.055293 0.135500 -0.047119 "/>
-        <geometry>
-          <cylinder radius="0.0055"  length="0.006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_cylinder31_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.022706 -0.003500 -0.057119 "/>
-        <geometry>
-          <cylinder radius="0.003"  length="0.014" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_cylinder32_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="0.022706 -0.003500 -0.047119 "/>
-        <geometry>
-          <cylinder radius="0.0055"  length="0.006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_cylinder41_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.055293 -0.003500 -0.057119 "/>
-        <geometry>
-          <cylinder radius="0.003"  length="0.014" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <collision name='right_foot_cylinder42_collision'>
-        <origin rpy="0.000000 0.000000 0.000000 " xyz="-0.055293 -0.003500 -0.047119 "/>
-        <geometry>
-          <cylinder radius="0.0055"  length="0.006" />
-        </geometry>
-          <sdf resolution = "512"/>
-      </collision>
-      <visual name='right_foot_visual'>
-            <origin rpy="-1.570796327 0.000000 0.0 " xyz="0.000000 0.000000 0.000000 "/>
-        <geometry>
-          <mesh filename="meshes/right_foot.STL" />
-        </geometry>
-        <material name='right_foot_material'>
-          <rgba>1 1 1 1</rgba>
-        </material>
-      </visual>
-    </link>
-</robot>  
+<robot name="robot">
+  <link name="chest">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.00018384687032060699 -0.0045161370514227696 -0.057123501960896897"/>
+      <mass value="0.18192504598295396"/>
+      <inertia ixx="0.00046345121044283501" ixy="-1.69677482344443e-08" ixz="3.1548801144944602e-07" iyy="0.000627560669282691" iyz="-2.8050692226923402e-06" izz="0.00057015264499342302"/>
+    </inertial>
+    <collision name="chestbox">
+      <origin rpy="0 0 0" xyz="0 0.005 -0.05"/>
+      <geometry>
+        <box size="0.1125 0.0975 0.14"/>
+      </geometry>
+    </collision>
+    <collision name="chest_cylinder">
+      <origin rpy="0 1.570796327 0" xyz="0 -0.0756991 0.038"/>
+      <geometry>
+        <cylinder length="0.1146" radius="0.008"/>
+      </geometry>
+    </collision>
+    <visual name="chest_visual">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/chest.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="left_arm_upper" type="revolute">
+    <origin rpy="0.0 0.0 1.5707963267948963" xyz="-0.077 0.0134 0.0"/>
+    <parent link="chest"/>
+    <child link="left_shoulder"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+  </joint>
+  <link name="left_shoulder">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-3.4807000000000002e-09 0.023605999999999999 -0.0044032000000000003"/>
+      <mass value="0.044031000000000001"/>
+      <inertia ixx="1.2764e-05" ixy="-6.4513999999999998e-12" ixz="-2.33e-11" iyy="1.5491000000000001e-05" iyz="2.6081999999999999e-06" izz="1.2414e-05"/>
+    </inertial>
+    <!-- <collision name="left_shoulder_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_shoulder.STL" scale="1 1 1"/>
+      </geometry>
+    </collision> -->
+    <visual name="left_shoulder_visual">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_shoulder.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="left_arm_middle" type="revolute">
+    <origin rpy="0.0 0.0 0.0" xyz="0.028100000000000007 0.025800000000000003 -0.029"/>
+    <parent link="left_shoulder"/>
+    <child link="left_arm"/>
+    <axis xyz="-1 0 0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <link name="left_arm">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.027900000000000001 2.8453e-05 -0.046835000000000002"/>
+      <mass value="0.14643999999999999"/>
+      <inertia ixx="5.2957000000000001e-05" ixy="6.2608e-11" ixz="-2.0249999999999999e-07" iyy="5.8520000000000002e-05" iyz="1.1014000000000001e-07" izz="3.6597000000000002e-05"/>
+    </inertial>
+    <!-- <collision name="left_arm_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_arm.STL" scale="1 1 1"/>
+      </geometry>
+    </collision> -->
+    <visual name="left_arm_visual">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_arm.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="left_arm_lower" type="revolute">
+    <origin rpy="0.0 1.5700000000000003 0.0" xyz="-0.028100000000000003 0.023349999999999982 -0.1076"/>
+    <parent link="left_arm"/>
+    <child link="left_hand"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="3" lower="-3.0" upper="3.0" velocity="20"/>
+  </joint>
+  <link name="left_hand">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.070329000000000003 -0.014057 -0.021406999999999999"/>
+      <mass value="0.064269999999999994"/>
+      <inertia ixx="1.2951e-05" ixy="-2.5065000000000001e-06" ixz="-3.8137999999999999e-07" iyy="5.8740999999999999e-05" iyz="1.7884999999999999e-12" izz="6.1017999999999998e-05"/>
+    </inertial>
+    <!-- <collision name="left_hand_collision">
+      <origin rpy="-9.585434110729995e-39 0.0 -1.2037058335851012e-35" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_hand.STL" scale="1 1 1"/>
+      </geometry>
+    </collision> -->
+    <visual name="left_hand_visual">
+      <origin rpy="-9.585434110729995e-39 0.0 -1.2037058335851012e-35" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_hand.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="left_hip_yaw" type="revolute">
+    <origin rpy="0.0 0.0 0.0" xyz="-0.045 0.0133599999999985 -0.16995"/>
+    <parent link="chest"/>
+    <child link="left_leg_yaw"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0347" friction="0.0843" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="left_leg_yaw">
+    <inertial>
+      <origin rpy="0 0 0" xyz="2.79158363092336e-11 0.0032849786860274402 -0.029820774757243301"/>
+      <mass value="0.058662024462932297"/>
+      <inertia ixx="3.0496686582707501e-05" ixy="-8.4677743033588304e-14" ixz="8.5574380306308406e-14" iyy="1.16928645977672e-05" iyz="-9.4199503165967801e-08" izz="3.04113434807083e-05"/>
+    </inertial>
+    <collision name="left_leg_yaw_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.00515 -0.0225"/>
+      <geometry>
+        <box size="0.041 0.0637 0.003"/>
+      </geometry>
+    </collision>
+    <visual name="left_leg_yaw_visual">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_leg_yaw.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="left_hip_roll" type="revolute">
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 -0.0291999999999996 -0.055000000000000104"/>
+    <parent link="left_leg_yaw"/>
+    <child link="left_leg_roll"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0347" friction="0.0843" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="left_leg_roll">
+    <inertial>
+      <origin rpy="0 0 0" xyz="2.5451643078176801e-05 0.0109782278240607 -0.014084438514210301"/>
+      <mass value="0.17675216665704899"/>
+      <inertia ixx="6.1790335519862398e-05" ixy="-9.41308133856575e-10" ixz="-2.1169089800936899e-07" iyy="6.5889939337192494e-05" iyz="-2.14817110544029e-07" izz="3.9028076120466002e-05"/>
+    </inertial>
+    <collision name="left_leg_roll_upper_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.03065 -0.0181167"/>
+      <geometry>
+        <box size="0.0502 0.0643 0.0652552"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_roll_lower_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 -0.03975 -0.0148385"/>
+      <geometry>
+        <box size="0.028997 0.0035 0.0553928"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_roll_down_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="1.37526e-05 -0.019 -0.0175502"/>
+      <geometry>
+        <box size="0.0403884 0.038 0.0611006"/>
+      </geometry>
+    </collision>
+    <visual name="left_leg_roll_visual">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_leg_roll.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="left_hip_pitch" type="revolute">
+    <origin rpy="-0.34059803684003587 1.5659322938814761 2.80099089209511" xyz="-0.028999695229219802 0.0292000000000009 0.00013295342185881687"/>
+    <parent link="left_leg_roll"/>
+    <child link="left_leg_pitch"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0414" friction="0.1179" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="left_leg_pitch">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.037596773583596303 -1.1295629535890101e-10 -0.027981515122906"/>
+      <mass value="0.027887725075667901"/>
+      <inertia ixx="2.41537468742227e-06" ixy="3.2274965794789498e-14" ixz="4.7964487075471796e-12" iyy="1.14633756275734e-05" iyz="7.7934947477887403e-15" izz="1.3716039319153201e-05"/>
+    </inertial>
+    <collision name="left_leg_pitch_big_collision">
+      <origin rpy="-3.041176688003274e-22 0.0 -3.6447023296387284e-20" xyz="0.11474999999999998 -1.5099490766076817e-20 -0.0289924"/>
+      <geometry>
+        <box size="0.0595 0.029 0.0459848"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_pitch_p_one0_collision">
+      <origin rpy="-3.041176688003274e-22 0.0 -3.6447023296387284e-20" xyz="0.11194999999999997 -1.4722848409401584e-20 -0.01275"/>
+      <geometry>
+        <box size="0.0651 0.029 0.0015"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_pitch_p_one1_collision">
+      <origin rpy="-3.041176688003274e-22 0.0 -3.6447023296387284e-20" xyz="0.11194999999999997 -1.4722848409401584e-20 -0.01275"/>
+      <geometry>
+        <box size="0.0539 0.0402 0.0015"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_pitch_p_two0_collision">
+      <origin rpy="-3.041176688003274e-22 0.0 -3.6447023296387284e-20" xyz="0.11194999999999997 -1.47400066613078e-20 -0.04525"/>
+      <geometry>
+        <box size="0.0651 0.029 0.0015"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_pitch_p_two1_collision">
+      <origin rpy="-3.041176688003274e-22 0.0 -3.6447023296387284e-20" xyz="0.11194999999999997 -1.47400066613078e-20 -0.04525"/>
+      <geometry>
+        <box size="0.0539 0.0402 0.0015"/>
+      </geometry>
+    </collision>
+    <visual name="left_leg_pitch_visual">
+      <origin rpy="-3.041176688003274e-22 0.0 -3.6447023296387284e-20" xyz="-2.7755575615628914e-17 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_leg_pitch.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="left_knee" type="revolute">
+    <origin rpy="3.3406840085472114e-16 2.1316282072803006e-14 7.672907131907189e-15" xyz="0.12999999999999962 1.0113437864944785e-15 -0.00550000000000285"/>
+    <parent link="left_leg_pitch"/>
+    <child link="left_leg_knee"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0414" friction="0.1179" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="left_leg_knee">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.084360298558876695 -8.6736173798840404e-17 -0.024127643002784999"/>
+      <mass value="0.0328192125267944"/>
+      <inertia ixx="1.9489049933254499e-06" ixy="2.35500388345378e-20" ixz="-4.79645500496334e-12" iyy="4.3073341622455502e-05" iyz="9.3300803217153103e-22" izz="4.4968042537653101e-05"/>
+    </inertial>
+    <collision name="left_leg_knee_collision0">
+      <origin rpy="-2.9689344774424166e-22 0.0 -5.467117621809226e-20" xyz="-5.863754802938565e-20 1.7347492302658055e-18 -0.04974999999999999"/>
+      <geometry>
+        <cylinder length="0.0055" radius="0.014"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_knee_collision1">
+      <origin rpy="-2.9689344774424166e-22 0.0 -5.467117621809226e-20" xyz="3.535932544485566e-21 1.7347219229543549e-18 0.003000000000000014"/>
+      <geometry>
+        <cylinder length="0.0055" radius="0.014"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_knee_collision2">
+      <origin rpy="-2.9689344774424166e-22 0.0 -5.467117621809226e-20" xyz="0.13035999999999998 1.724696223581208e-18 -0.04974999999999999"/>
+      <geometry>
+        <cylinder length="0.0055" radius="0.014"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_knee_collision3">
+      <origin rpy="-2.9689344774424166e-22 0.0 -5.467117621809226e-20" xyz="0.13035999999999998 1.7246689162697574e-18 0.003000000000000014"/>
+      <geometry>
+        <cylinder length="0.0055" radius="0.014"/>
+      </geometry>
+    </collision>
+    <visual name="left_leg_knee_visual">
+      <origin rpy="-2.9689344774424166e-22 0.0 -5.467117621809226e-20" xyz="0.0 1.734723475976807e-18 1.3877787807814457e-17"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_leg_knee.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="left_ankle_pitch" type="revolute">
+    <origin rpy="3.14159265358979 1.5707963267948952 0.0" xyz="0.12999999999999534 1.214306433183765e-17 -4.579669976578771e-16"/>
+    <parent link="left_leg_knee"/>
+    <child link="left_leg_ankle"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0414" friction="0.1179" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="left_leg_ankle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.023591474010887299 -0.016018144082549299 0.014279996378477801"/>
+      <mass value="0.173948205448793"/>
+      <inertia ixx="6.1525563546113303e-05" ixy="-4.3529887410332497e-11" ixz="1.07316479776985e-07" iyy="6.5767469559665899e-05" iyz="-1.9005632960375801e-07" izz="3.8828440030109099e-05"/>
+    </inertial>
+    <collision name="left_leg_ankle_small_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.023507600000000007 -0.0435 0.014751899999999998"/>
+      <geometry>
+        <box size="0.0289848 0.041 0.0554962"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_small11_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.023500000000000007 -0.05825 0.017549999999999996"/>
+      <geometry>
+        <box size="0.0290000 0.0045 0.0611"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_small12_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.023500000000000007 -0.05825 0.017549999999999996"/>
+      <geometry>
+        <box size="0.0402 0.0045 0.0499"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_small21_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.023500000000000007 -0.0287388 0.017549999999999996"/>
+      <geometry>
+        <box size="0.029 0.0045 0.0611"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_small22_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.023500000000000007 -0.0287388 0.017549999999999996"/>
+      <geometry>
+        <box size="0.0402 0.0045 0.0499"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_big_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.023500000000000007 -8.288778641338905e-24 0.015249999999999998"/>
+      <geometry>
+        <box size="0.046 0.029 0.0595"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_big11_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.03875000000000001 -1.839720260963753e-24 0.018049999999999997"/>
+      <geometry>
+        <box size="0.0035 0.029 0.0651"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_big12_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.03875000000000001 -1.839720260963753e-24 0.018049999999999997"/>
+      <geometry>
+        <box size="0.0035 0.0402 0.0539"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_big21_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.008000000000000002 -2.4254046954713564e-23 0.018049999999999997"/>
+      <geometry>
+        <box size="0.003 0.029 0.0651"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_big22_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.008000000000000002 -2.4254046954713564e-23 0.018049999999999997"/>
+      <geometry>
+        <box size="0.0035 0.0402 0.0539"/>
+      </geometry>
+    </collision>
+    <collision name="left_leg_ankle_upper_collision">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.023500000000000007 0.02785 0.006999999999999999"/>
+      <geometry>
+        <box size="0.039 0.0027 0.03"/>
+      </geometry>
+    </collision>
+    <visual name="left_leg_ankle_visual">
+      <origin rpy="-9.019606432751447e-20 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_leg_ankle.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="left_ankle_roll" type="revolute">
+    <origin rpy="-6.3439431139357456e-18 -0.0045846107623825905 3.943480964427586e-18" xyz="0.02349999999999914 -0.0694999999999985 -1.1102230246251565e-15"/>
+    <parent link="left_leg_ankle"/>
+    <child link="left_foot"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0347" friction="0.0843" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="left_foot">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.012987042423108899 0.068287744807163195 -0.035867822185710399"/>
+      <mass value="0.144176668751163"/>
+      <inertia ixx="0.00014149565462157499" ixy="-1.52740202739877e-09" ixz="1.9349728888557201e-07" iyy="5.0645258641957197e-05" iyz="-3.3396462913510601e-07" izz="0.000183700741709755"/>
+    </inertial>
+    <collision name="left_foot_box1_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="-0.016187800000000002 0.06599999999999999 -0.04092619999999995"/>
+      <geometry>
+        <box size="0.09 0.126 0.016"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_box2_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="-0.016210600000000002 0.06602279999999999 -0.04092599999999994"/>
+      <geometry>
+        <box size="0.0659544 0.149954 0.012"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_box3_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="-0.016187800000000002 0.06599999999999999 -0.04092619999999995"/>
+      <geometry>
+        <box size="0.087 0.147 0.006"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_box4_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="-0.016172500000000003 0.14108599999999996 -0.03758899999999994"/>
+      <geometry>
+        <box size="0.09 0.00582764 0.0186744"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_cylinder11_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="0.022706300000000002 0.13549999999999998 -0.05711849999999995"/>
+      <geometry>
+        <cylinder length="0.014" radius="0.003"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_cylinder12_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="0.022706300000000002 0.13549999999999998 -0.047118499999999945"/>
+      <geometry>
+        <cylinder length="0.006" radius="0.0055"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_cylinder21_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="-0.05529280000000002 0.13549999999999998 -0.05711849999999995"/>
+      <geometry>
+        <cylinder length="0.014" radius="0.003"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_cylinder22_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="-0.05529280000000002 0.13549999999999998 -0.047118499999999945"/>
+      <geometry>
+        <cylinder length="0.006" radius="0.0055"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_cylinder31_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="0.022706300000000002 -0.0034999999999999996 -0.05711849999999995"/>
+      <geometry>
+        <cylinder length="0.014" radius="0.003"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_cylinder32_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="0.022706300000000002 -0.0034999999999999996 -0.047118499999999945"/>
+      <geometry>
+        <cylinder length="0.006" radius="0.0055"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_cylinder41_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="-0.05529280000000002 -0.0034999999999999996 -0.05711849999999995"/>
+      <geometry>
+        <cylinder length="0.014" radius="0.003"/>
+      </geometry>
+    </collision>
+    <collision name="left_foot_cylinder42_collision">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="-0.05529280000000002 -0.0034999999999999996 -0.047118499999999945"/>
+      <geometry>
+        <cylinder length="0.006" radius="0.0055"/>
+      </geometry>
+    </collision>
+    <visual name="left_foot_visual">
+      <origin rpy="5.3748044722108907e-20 0.0 9.998660684650937e-24" xyz="0.0 0.0 5.551115123125783e-17"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/left_foot.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="head_yaw" type="revolute">
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0134 0.020750000000000046"/>
+    <parent link="chest"/>
+    <child link="neck"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0347" friction="0.0843" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="neck">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-7.5807536161530796e-05 5.40612055642542e-09 0.026022869677138901"/>
+      <mass value="0.054959742050374599"/>
+      <inertia ixx="1.1553114985236599e-05" ixy="-6.3224562597767901e-12" ixz="1.10127762796851e-07" iyy="1.38245264991759e-05" iyz="-6.4352650730185303e-12" izz="1.0034260801326499e-05"/>
+    </inertial>
+    <collision name="neck_collision1">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0304"/>
+      <geometry>
+        <box size="0.0302 0.0356 0.0396"/>
+      </geometry>
+    </collision>
+    <collision name="neck_collision2">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 2.7287e-05 0.0331898"/>
+      <geometry>
+        <box size="0.0355 0.0243864 0.0451795"/>
+      </geometry>
+    </collision>
+    <collision name="neck_collision3">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0095"/>
+      <geometry>
+        <box size="0.0342 0.0355 0.015"/>
+      </geometry>
+    </collision>
+    <visual name="neck_visual">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/neck.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="head_pitch" type="revolute">
+    <origin rpy="1.5707963267948957 -1.4912133887083963 -1.570796326794886" xyz="-0.0187500000000007 -3.469446951953614e-18 0.04379999999999995"/>
+    <parent link="neck"/>
+    <child link="head"/>
+    <axis xyz="-4.5536491244391186e-18 0 1"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0347" friction="0.0843" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="head">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.051351626755169598 0.0053814322626007903 -0.0183017230128328"/>
+      <mass value="0.080370395509901299"/>
+      <inertia ixx="2.0782839377867802e-05" ixy="-5.7039686565431499e-07" ixz="-6.5737404978777497e-09" iyy="4.5624129183850597e-05" iyz="1.34009185452834e-08" izz="3.6502070438585903e-05"/>
+    </inertial>
+    <collision name="head_collision1">
+      <origin rpy="-2.1079303241318296e-31 0.0 5.946276934257045e-19" xyz="0.058662799999999994 0.00659088 -0.0185"/>
+      <geometry>
+        <sphere radius="0.0305397"/>
+      </geometry>
+    </collision>
+    <collision name="head_collision2">
+      <origin rpy="-2.1079303241318296e-31 0.0 5.946276934257045e-19" xyz="0.051819899999999995 0.00700583 -0.0185"/>
+      <geometry>
+        <sphere radius="0.0284086"/>
+      </geometry>
+    </collision>
+    <collision name="head_collision3">
+      <origin rpy="-2.1079303241318296e-31 0.0 5.946276934257045e-19" xyz="0.056195199999999994 -0.00401172 -0.0185"/>
+      <geometry>
+        <sphere radius="0.0349883"/>
+      </geometry>
+    </collision>
+    <visual name="head_visual">
+      <origin rpy="-2.1079303241318296e-31 0.0 5.946276934257045e-19" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/head.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="right_arm_upper" type="revolute">
+    <origin rpy="0.0 0.0 1.5707963267948963" xyz="0.0747 0.0134 0.0"/>
+    <parent link="chest"/>
+    <child link="right_shoulder"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+  </joint>
+  <link name="right_shoulder">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.00049892999999999997 -0.027125 -0.0079813000000000002"/>
+      <mass value="0.051527000000000003"/>
+      <inertia ixx="1.3534e-05" ixy="-6.4513999999999998e-12" ixz="1.8503000000000001e-11" iyy="1.5883999999999999e-05" iyz="-2.6081999999999999e-06" izz="1.2807e-05"/>
+    </inertial>
+    <!-- <collision name="right_shoulder_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_shoulder.STL" scale="1 1 1"/>
+      </geometry>
+    </collision> -->
+    <visual name="right_shoulder_visual">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_shoulder.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="right_arm_middle" type="revolute">
+    <origin rpy="0.0 0.0 0.0" xyz="-0.022 -0.028999999999999998 -0.029"/>
+    <parent link="right_shoulder"/>
+    <child link="right_arm"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <link name="right_arm">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.022026 -2.9995e-05 -0.049362000000000003"/>
+      <mass value="0.13894999999999999"/>
+      <inertia ixx="5.2185999999999998e-05" ixy="1.9850000000000001e-11" ixz="-2.0237999999999999e-07" iyy="5.8127000000000001e-05" iyz="-1.1015e-07" izz="3.6204000000000001e-05"/>
+    </inertial>
+    <!-- <collision name="right_arm_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_arm.STL" scale="1 1 1"/>
+      </geometry>
+    </collision> -->
+    <visual name="right_arm_visual">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_arm.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="right_arm_lower" type="revolute">
+    <origin rpy="0.0 1.5700000000000003 0.0" xyz="0.022 0.019250000000000003 -0.1076"/>
+    <parent link="right_arm"/>
+    <child link="right_hand"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="3" lower="-3.0" upper="3.0" velocity="20"/>
+  </joint>
+  <link name="right_hand">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.0048133999999999998 -0.028542999999999999 -0.073357000000000006"/>
+      <mass value="0.064269999999999994"/>
+      <inertia ixx="5.8352e-05" ixy="5.7131999999999996e-07" ixz="1.1009000000000001e-05" iyy="5.8740999999999999e-05" iyz="-2.4405000000000002e-06" izz="1.5617999999999999e-05"/>
+    </inertial>
+    <!-- <collision name="right_hand_collision">
+      <origin rpy="-3.961999175063861e-35 -1.33 2.644734878391156e-35" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_hand.STL" scale="1 1 1"/>
+      </geometry>
+    </collision> -->
+    <visual name="right_hand_visual">
+      <origin rpy="-3.961999175063861e-35 -1.33 2.644734878391156e-35" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_hand.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="right_hip_yaw" type="revolute">
+    <origin rpy="0.0 0.0 0.0" xyz="0.045 0.0133599999999985 -0.16995"/>
+    <parent link="chest"/>
+    <child link="right_leg_yaw"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0347" friction="0.0843" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="right_leg_yaw">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-3.3770200524862999e-10 0.0032849786860274502 -0.0298207747575896"/>
+      <mass value="0.0586620244629322"/>
+      <inertia ixx="3.0496686583123601e-05" ixy="-3.16154434574983e-14" ixz="-1.34169348176914e-13" iyy="1.16928645977672e-05" iyz="-9.4199503115753094e-08" izz="3.0411343480292098e-05"/>
+    </inertial>
+    <collision name="right_leg_yaw_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.00515 -0.0225"/>
+      <geometry>
+        <box size="0.041 0.0637 0.003"/>
+      </geometry>
+    </collision>
+    <visual name="right_leg_yaw_visual">
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_leg_yaw.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="right_hip_roll" type="revolute">
+    <origin rpy="0.0 -0.006478263843886278 0.0" xyz="0.0 -0.0291999999999996 -0.055000000000000104"/>
+    <parent link="right_leg_yaw"/>
+    <child link="right_leg_roll"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0347" friction="0.0843" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="right_leg_roll">
+    <inertial>
+      <origin rpy="0 0 0" xyz="9.0022878971703093e-05 0.0109782278543254 -0.0140841738328886"/>
+      <mass value="0.176752167034151"/>
+      <inertia ixx="6.1791798147460997e-05" ixy="4.3532300340763102e-11" ixz="-1.07327270209975e-07" iyy="6.5889939430164294e-05" iyz="-2.14819182994814e-07" izz="3.9026613600567697e-05"/>
+    </inertial>
+    <collision name="right_leg_roll_upper_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="-6.9298706801155786e-18 0.03065 -0.018116699999999968"/>
+      <geometry>
+        <box size="0.0502 0.0643 0.0652552"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_roll_lower_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="-6.931503424060877e-18 -0.03975 -0.01483849999999997"/>
+      <geometry>
+        <box size="0.028997 0.0035 0.0553928"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_roll_down_collision">
+      <origin rpy="0.0 0.0 0.0" xyz="1.3752599999993069e-05 -0.019 -0.017550199999999967"/>
+      <geometry>
+        <box size="0.0403884 0.038 0.0611006"/>
+      </geometry>
+    </collision>
+    <visual name="right_leg_roll_visual">
+      <origin rpy="0.0 0.0 0.0" xyz="-6.938893903907228e-18 0.0 2.7755575615628914e-17"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_leg_roll.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="right_hip_pitch" type="revolute">
+    <origin rpy="1.5707963267974303 1.56702784493591 1.5707963267974459" xyz="0.028999999999999304 0.0292 2.7755575615628914e-17"/>
+    <parent link="right_leg_roll"/>
+    <child link="right_leg_pitch"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0414" friction="0.1179" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="right_leg_pitch">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.037596773584000001 2.6198183206149698e-10 -0.030018484877093299"/>
+      <mass value="0.027887725075667901"/>
+      <inertia ixx="2.4153746871926199e-06" ixy="-7.4854894278663796e-14" ixz="-4.7964209833556204e-12" iyy="1.14633756278031e-05" iyz="1.8075310725767399e-14" izz="1.3716039319153301e-05"/>
+    </inertial>
+    <collision name="right_leg_pitch_big_collision">
+      <origin rpy="-1.783523083113723e-21 0.0 -7.646463071698776e-21" xyz="0.11474999999999996 1.7453514915346614e-18 -0.028992399999999998"/>
+      <geometry>
+        <box size="0.0595 0.029 0.0459848"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_pitch_p_one0_collision">
+      <origin rpy="-1.783523083113723e-21 0.0 -7.646463071698776e-21" xyz="0.11194999999999995 1.7451658991049358e-18 -0.012749999999999997"/>
+      <geometry>
+        <box size="0.0651 0.029 0.0015"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_pitch_p_one1_collision">
+      <origin rpy="-1.783523083113723e-21 0.0 -7.646463071698776e-21" xyz="0.11194999999999995 1.7451658991049358e-18 -0.012749999999999997"/>
+      <geometry>
+        <box size="0.0539 0.0402 0.0015"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_pitch_p_two0_collision">
+      <origin rpy="-1.783523083113723e-21 0.0 -7.646463071698776e-21" xyz="0.11194999999999995 1.7450116300655727e-18 -0.04524999999999999"/>
+      <geometry>
+        <box size="0.0651 0.029 0.0015"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_pitch_p_two1_collision">
+      <origin rpy="-1.783523083113723e-21 0.0 -7.646463071698776e-21" xyz="0.11194999999999995 1.7450116300655727e-18 -0.04524999999999999"/>
+      <geometry>
+        <box size="0.0539 0.0402 0.0015"/>
+      </geometry>
+    </collision>
+    <visual name="right_leg_pitch_visual">
+      <origin rpy="-1.783523083113723e-21 0.0 -7.646463071698776e-21" xyz="-2.7755575615628914e-17 1.734723475976807e-18 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_leg_pitch.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="right_knee" type="revolute">
+    <origin rpy="8.26353924749796e-16 2.6201263381153694e-14 -1.4487316805982308e-14" xyz="0.13000000000000006 6.314393452555578e-16 -0.005499999999998409"/>
+    <parent link="right_leg_pitch"/>
+    <child link="right_leg_knee"/>
+    <axis xyz="-1.8970996919654565e-17 0 -1"/>
+    <limit effort="10" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0414" friction="0.1179" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="right_leg_knee">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.084360298558875405 -5.3776427755281001e-17 -0.022872356997215001"/>
+      <mass value="0.0328192125267944"/>
+      <inertia ixx="1.9489049933254499e-06" ixy="-1.4998438866811501e-20" ixz="4.7964550293966002e-12" iyy="4.3073341622455502e-05" iyz="4.6518569698450903e-22" izz="4.4968042537653101e-05"/>
+    </inertial>
+    <collision name="right_leg_knee_collision0">
+      <origin rpy="2.5000833243844198e-21 0.0 2.2939389217508123e-20" xyz="-5.552037845353221e-17 1.734892676607461e-18 -0.04975"/>
+      <geometry>
+        <cylinder length="0.0055" radius="0.014"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_knee_collision1">
+      <origin rpy="2.5000833243844198e-21 0.0 2.2939389217508123e-20" xyz="-5.55105948158443e-17 1.7347132729237024e-18 0.003"/>
+      <geometry>
+        <cylinder length="0.0055" radius="0.014"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_knee_collision2">
+      <origin rpy="2.5000833243844198e-21 0.0 2.2939389217508123e-20" xyz="0.13035999999999992 1.758617018693644e-18 -0.04975"/>
+      <geometry>
+        <cylinder length="0.0055" radius="0.014"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_knee_collision3">
+      <origin rpy="2.5000833243844198e-21 0.0 2.2939389217508123e-20" xyz="0.13035999999999992 1.7584376150098857e-18 0.003"/>
+      <geometry>
+        <cylinder length="0.0055" radius="0.014"/>
+      </geometry>
+    </collision>
+    <visual name="right_leg_knee_visual">
+      <origin rpy="2.5000833243844198e-21 0.0 2.2939389217508123e-20" xyz="-5.551115123125783e-17 1.734723475976807e-18 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_leg_knee.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="right_ankle_pitch" type="revolute">
+    <origin rpy="-0.0013797295538484633 -1.5707963267948617 0.0" xyz="0.13000000000000012 2.5240226575462543e-15 0.003100000000003933"/>
+    <parent link="right_leg_knee"/>
+    <child link="right_leg_ankle"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0414" friction="0.1179" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="right_leg_ankle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.026508525961580699 -0.016018144109070299 0.0142799963574565"/>
+      <mass value="0.17394820501059499"/>
+      <inertia ixx="6.1525563468979203e-05" ixy="-4.3542375080641399e-11" ixz="1.0731643525882001e-07" iyy="6.5767469449289794e-05" iyz="-1.90056299790816e-07" izz="3.8828439931667398e-05"/>
+    </inertial>
+    <collision name="right_leg_ankle_small_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.026607599999999985 -0.0435 0.0147519"/>
+      <geometry>
+        <box size="0.0289848 0.041 0.0554962"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_small11_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.026599999999999985 -0.05825 0.01755"/>
+      <geometry>
+        <box size="0.0290000 0.0045 0.0611"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_small12_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.026599999999999985 -0.05825 0.01755"/>
+      <geometry>
+        <box size="0.0402 0.0045 0.0499"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_small21_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.026599999999999985 -0.0287388 0.01755"/>
+      <geometry>
+        <box size="0.029 0.0045 0.0611"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_small22_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.026599999999999985 -0.0287388 0.01755"/>
+      <geometry>
+        <box size="0.0402 0.0045 0.0499"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_big_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.026599999999999985 -4.944143131592539e-21 0.01525"/>
+      <geometry>
+        <box size="0.046 0.029 0.0595"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_big11_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.041849999999999984 -5.802588905575922e-21 0.01805"/>
+      <geometry>
+        <box size="0.0035 0.029 0.0651"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_big12_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.041849999999999984 -5.802588905575922e-21 0.01805"/>
+      <geometry>
+        <box size="0.0035 0.0402 0.0539"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_big21_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.011099999999999987 -5.948925840358615e-21 0.01805"/>
+      <geometry>
+        <box size="0.003 0.029 0.0651"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_big22_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.011099999999999987 -5.948925840358615e-21 0.01805"/>
+      <geometry>
+        <box size="0.0035 0.0402 0.0539"/>
+      </geometry>
+    </collision>
+    <collision name="right_leg_ankle_upper_collision">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="-0.026599999999999985 0.02785 0.007"/>
+      <geometry>
+        <box size="0.039 0.0027 0.03"/>
+      </geometry>
+    </collision>
+    <visual name="right_leg_ankle_visual">
+      <origin rpy="4.836886679632412e-20 0.0 -3.686452702818626e-21" xyz="1.3877787807814457e-17 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_leg_ankle.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+  <joint name="right_ankle_roll" type="revolute">
+    <origin rpy="-8.189825335909092e-19 0.0 -1.3596032129378206e-18" xyz="-0.026600000000000082 -0.06950000000000016 1.6653345369377348e-16"/>
+    <parent link="right_leg_ankle"/>
+    <child link="right_foot"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="3" lower="-3.14159265359" upper="3.14159265359" velocity="20"/>
+    <dynamics damping="0.0347" friction="0.0843" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+  <link name="right_foot">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.012889344838027599 0.068349573591404394 -0.036000558661549199"/>
+      <mass value="0.14342863960313501"/>
+      <inertia ixx="0.00014133738462663599" ixy="3.7013888509899199e-12" ixz="-2.0333584432894299e-12" iyy="5.0459643793834899e-05" iyz="-3.2037887084776298e-07" izz="0.000183618491010819"/>
+    </inertial>
+    <collision name="right_foot_box1_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="-0.016187799999999992 0.066 -0.0409262"/>
+      <geometry>
+        <box size="0.09 0.126 0.016"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_box2_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="-0.01621059999999999 0.0660228 -0.040926"/>
+      <geometry>
+        <box size="0.0659544 0.149954 0.012"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_box3_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="-0.016187799999999992 0.066 -0.0409262"/>
+      <geometry>
+        <box size="0.087 0.147 0.006"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_box4_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="-0.016172499999999992 0.141086 -0.037589"/>
+      <geometry>
+        <box size="0.09 0.00582764 0.0186744"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_cylinder11_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="0.022706300000000006 0.1355 -0.0571185"/>
+      <geometry>
+        <cylinder length="0.014" radius="0.003"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_cylinder12_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="0.022706300000000006 0.1355 -0.0471185"/>
+      <geometry>
+        <cylinder length="0.006" radius="0.0055"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_cylinder21_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="-0.055292799999999996 0.1355 -0.0571185"/>
+      <geometry>
+        <cylinder length="0.014" radius="0.003"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_cylinder22_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="-0.055292799999999996 0.1355 -0.0471185"/>
+      <geometry>
+        <cylinder length="0.006" radius="0.0055"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_cylinder31_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="0.022706300000000006 -0.0035 -0.0571185"/>
+      <geometry>
+        <cylinder length="0.014" radius="0.003"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_cylinder32_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="0.022706300000000006 -0.0035 -0.0471185"/>
+      <geometry>
+        <cylinder length="0.006" radius="0.0055"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_cylinder41_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="-0.055292799999999996 -0.0035 -0.0571185"/>
+      <geometry>
+        <cylinder length="0.014" radius="0.003"/>
+      </geometry>
+    </collision>
+    <collision name="right_foot_cylinder42_collision">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="-0.055292799999999996 -0.0035 -0.0471185"/>
+      <geometry>
+        <cylinder length="0.006" radius="0.0055"/>
+      </geometry>
+    </collision>
+    <visual name="right_foot_visual">
+      <origin rpy="4.836886679632402e-20 0.0 -3.686452702818626e-21" xyz="6.938893903907228e-18 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://dancer_description/urdf/meshes/right_foot.STL" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <enable_wind>false</enable_wind>
+  </link>
+</robot>
