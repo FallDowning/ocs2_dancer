@@ -25,4 +25,8 @@ launch 文件 的resource 文件地址为dancer_description的dae文件，还未
 
 ## Modified（3.9）
 - 修改了一些程序bug，导入了新的urdf模型，目前urdf模型还存在一些问题（collision是stl文件的情况下无法加载）（已解决）
-- 目前存在p gain 不等于自由度的报错
+- 目前存在这样的报错 “p gains should have the same dimension as the degrees of freedom”
+
+## Modified（3.10）
+- 将urdf中的与走路无关的关节设置为fixed，可以解决3.9的问题
+- 目前rviz可加载出模型，但走路姿势不正常

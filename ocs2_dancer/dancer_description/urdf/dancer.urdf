@@ -26,7 +26,7 @@
     </visual>
     <enable_wind>false</enable_wind>
   </link>
-  <joint name="left_arm_upper" type="revolute">
+  <joint name="left_arm_upper" type="fixed">
     <origin rpy="0.0 0.0 1.5707963267948963" xyz="-0.077 0.0134 0.0"/>
     <parent link="chest"/>
     <child link="left_shoulder"/>
@@ -52,7 +52,7 @@
       </geometry>
     </visual>
   </link>
-  <joint name="left_arm_middle" type="revolute">
+  <joint name="left_arm_middle" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.028100000000000007 0.025800000000000003 -0.029"/>
     <parent link="left_shoulder"/>
     <child link="left_arm"/>
@@ -78,7 +78,7 @@
       </geometry>
     </visual>
   </link>
-  <joint name="left_arm_lower" type="revolute">
+  <joint name="left_arm_lower" type="fixed">
     <origin rpy="0.0 1.5700000000000003 0.0" xyz="-0.028100000000000003 0.023349999999999982 -0.1076"/>
     <parent link="left_arm"/>
     <child link="left_hand"/>
@@ -452,7 +452,7 @@
     </visual>
     <enable_wind>false</enable_wind>
   </link>
-  <joint name="head_yaw" type="revolute">
+  <joint name="head_yaw" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0134 0.020750000000000046"/>
     <parent link="chest"/>
     <child link="neck"/>
@@ -492,7 +492,7 @@
     </visual>
     <enable_wind>false</enable_wind>
   </link>
-  <joint name="head_pitch" type="revolute">
+  <joint name="head_pitch" type="fixed">
     <origin rpy="1.5707963267948957 -1.4912133887083963 -1.570796326794886" xyz="-0.0187500000000007 -3.469446951953614e-18 0.04379999999999995"/>
     <parent link="neck"/>
     <child link="head"/>
@@ -532,7 +532,7 @@
     </visual>
     <enable_wind>false</enable_wind>
   </link>
-  <joint name="right_arm_upper" type="revolute">
+  <joint name="right_arm_upper" type="fixed">
     <origin rpy="0.0 0.0 1.5707963267948963" xyz="0.0747 0.0134 0.0"/>
     <parent link="chest"/>
     <child link="right_shoulder"/>
@@ -558,7 +558,7 @@
       </geometry>
     </visual>
   </link>
-  <joint name="right_arm_middle" type="revolute">
+  <joint name="right_arm_middle" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="-0.022 -0.028999999999999998 -0.029"/>
     <parent link="right_shoulder"/>
     <child link="right_arm"/>
@@ -584,7 +584,7 @@
       </geometry>
     </visual>
   </link>
-  <joint name="right_arm_lower" type="revolute">
+  <joint name="right_arm_lower" type="fixed">
     <origin rpy="0.0 1.5700000000000003 0.0" xyz="0.022 0.019250000000000003 -0.1076"/>
     <parent link="right_arm"/>
     <child link="right_hand"/>
