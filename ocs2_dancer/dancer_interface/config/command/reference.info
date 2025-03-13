@@ -5,18 +5,18 @@ comHeight                           0.37
 
 defaultJointState
 {
-   (0,0)  -0.041147       ; left_hip_yaw
+   (0,0)   0.041147       ; left_hip_yaw
    (1,0)   0.142089       ; left_hip_roll
    (2,0)   0.978417       ; left_hip_pitch
    (3,0)   1.242302       ; left_knee
    (4,0)   0.546813       ; left_ankle_pitch
    (5,0)   0.147888       ; left_ankle_roll
    (6,0)  -0.041147       ; right_hip_yaw
-   (7,0)   0.142089       ; right_hip_roll
+   (7,0)  -0.142089       ; right_hip_roll
    (8,0)   0.978417       ; right_hip_pitch
    (9,0)   1.242302       ; right_knee
    (10,0)  0.546813       ; right_ankle_pitch
-   (11,0)  0.147888       ; right_ankle_roll
+   (11,0) -0.147888       ; right_ankle_roll
 }
 
 initialModeSchedule

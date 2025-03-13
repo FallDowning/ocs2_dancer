@@ -1,5 +1,17 @@
 <?xml version="1.0" ?>
 <robot name="robot">
+  <link name="virtual">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.0"/>
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <joint name="chest_to_virtual" type="fixed">
+    <origin rpy="0 0 -1.570796327" xyz="0 0 0"/>
+    <parent link="virtual"/>
+    <child link="chest"/>
+  </joint>
   <link name="chest">
     <inertial>
       <origin rpy="0 0 0" xyz="-0.00018384687032060699 -0.0045161370514227696 -0.057123501960896897"/>
@@ -27,7 +39,7 @@
     <enable_wind>false</enable_wind>
   </link>
   <joint name="left_arm_upper" type="fixed">
-    <origin rpy="0.0 0.0 1.5707963267948963" xyz="-0.077 0.0134 0.0"/>
+    <origin rpy="0.0 0.0 1.570796327" xyz="-0.077 0.0134 0.0"/>
     <parent link="chest"/>
     <child link="left_shoulder"/>
     <axis xyz="0 -1 0"/>
@@ -533,7 +545,7 @@
     <enable_wind>false</enable_wind>
   </link>
   <joint name="right_arm_upper" type="fixed">
-    <origin rpy="0.0 0.0 1.5707963267948963" xyz="0.0747 0.0134 0.0"/>
+    <origin rpy="0.0 0.0 1.570796327" xyz="0.0747 0.0134 0.0"/>
     <parent link="chest"/>
     <child link="right_shoulder"/>
     <axis xyz="0 -1 0"/>

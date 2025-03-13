@@ -267,12 +267,12 @@ matrix_t LeggedRobotInterface::initializeInputCostWeight(const std::string& task
         jacobianWorldToContactPointInWorldFrame.block(0, 6, 6, info.actuatedDofNum);
   }
 
-  std::cout << "before errors happen" << std::endl;
+  // std::cout << "before errors happen" << std::endl;
   matrix_t R_taskspace(totalContactDim + totalContactDim, totalContactDim + totalContactDim);
   std::cout << "Attempting to load matrix R from: " << taskFile << std::endl;
   // use for debugging
-  std::cout << "totalContactDim: " << totalContactDim << std::endl;
-  std::cout << "Matrix R_taskspace size: " << R_taskspace.rows() << "x" << R_taskspace.cols() << std::endl;
+  // std::cout << "totalContactDim: " << totalContactDim << std::endl;
+  // std::cout << "Matrix R_taskspace size: " << R_taskspace.rows() << "x" << R_taskspace.cols() << std::endl;
 
   loadData::loadEigenMatrix(taskFile, "R", R_taskspace);
 

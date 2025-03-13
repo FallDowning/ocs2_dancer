@@ -95,7 +95,7 @@ TargetTrajectories commandLineToTargetTrajectories(const vector_t& commadLineTar
 }
 
 int main(int argc, char* argv[]) {
-  const std::string robotName = "legged_robot";
+  const std::string robotName = "dancer";
 
   // Initialize ros node
   ::ros::init(argc, argv, robotName + "_target");

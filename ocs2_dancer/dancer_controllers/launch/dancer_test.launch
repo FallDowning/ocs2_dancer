@@ -38,5 +38,19 @@
     <param name="gaitCommandFile"   value="$(arg gaitCommandFile)"/>
     <param name="raisimFile"        value="$(arg raisimFile)" />
     <param name="resourcePath"      value="$(arg resourcePath)"/>
-</launch>
 
+
+          
+    <node pkg="dancer_interface_ros" type="dancer_gait_command" name="dancer_gait_command"
+          output="screen" launch-prefix="gnome-terminal --"/>
+          
+    <node pkg="dancer_controllers" type="dancer_mpc_test" name="dancer_mpc_test"
+          output="screen" launch-prefix=""/>
+
+    <node pkg="dancer_interface_ros" type="dancer_target" name="dancer_target"
+          output="screen" launch-prefix="gnome-terminal --"/>
+
+    <node pkg="dancer_controllers" type="dancer_mpc_dummy" name="dancer_mpc_dummy"
+          output="screen" launch-prefix="gnome-terminal --"/>
+
+</launch>

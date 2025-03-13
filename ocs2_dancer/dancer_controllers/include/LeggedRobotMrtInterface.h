@@ -64,10 +64,9 @@ public:
         initObs.time = time;
         initObs.state.setZero(getCentroidalModelInfo().stateDim);
         // initObs.state = rbdStateToState(rbdState);
-        initObs.state <<    0, 0, 0, 0, 0, 0,
-                            0, 0, 0.73, 0, 0, 0,
-                            0, 0, -0.4791, 0.83075, -0.35165, 0,
-                            0, 0, -0.4791, 0.83075, -0.35165, 0;
+        initObs.state << 0, 0, 0, 0, 0, 0, 0, 0, 0.37, 0, 0, 0, 0.041147, 0.142089, 0.978417, 1.242302, 0.546813,
+
+            0.147888, -0.041147, -0.142089, 0.978417, 1.242302, 0.546813, -0.147888;
         initObs.input = vector_t::Zero(getCentroidalModelInfo().inputDim);
         return initObs;
     }

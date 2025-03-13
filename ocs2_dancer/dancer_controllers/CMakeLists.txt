@@ -51,7 +51,7 @@ include_directories(
 # dancer mpc mrt
 add_executable(dancer_mpc_mrt
   src/dancerMpcMrtNode.cpp
-)
+) 
 
 add_dependencies(dancer_mpc_mrt
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
@@ -61,6 +61,32 @@ target_link_libraries(dancer_mpc_mrt
   ${catkin_LIBRARIES}
 )
 target_compile_options(dancer_mpc_mrt PRIVATE ${OCS2_CXX_FLAGS})
+
+# dancer mpc mrt
+add_executable(dancer_mpc_test
+  src/dancerMpcTestNode.cpp
+) 
+add_dependencies(dancer_mpc_test
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+)
+target_link_libraries(dancer_mpc_test
+  ${catkin_LIBRARIES}
+)
+target_compile_options(dancer_mpc_test PRIVATE ${OCS2_CXX_FLAGS})
+
+# dancer mpc mrt
+add_executable(dancer_mpc_dummy
+  src/dancerDummyNode.cpp
+) 
+add_dependencies(dancer_mpc_dummy
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+)
+target_link_libraries(dancer_mpc_dummy
+  ${catkin_LIBRARIES}
+)
+target_compile_options(dancer_mpc_dummy PRIVATE ${OCS2_CXX_FLAGS})
 
 # # dancer nmpc controller
 # add_executable(dancer_nmpc_controller 

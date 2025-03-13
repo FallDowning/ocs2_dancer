@@ -171,6 +171,11 @@ int main(int argc, char** argv) {
     initObservation.state = leggedrobotInterface.getInitialState();
     initObservation.input = vector_t::Zero(leggedrobotInterface.getCentroidalModelInfo().inputDim);
 
+    // use for debugging
+    std::cout << "Initial state(111111111): " << initObservation.state.transpose() << std::endl;
+
+    std::cout << "Initial input(111111111): " << initObservation.input.transpose() << std::endl;
+
     // initial command
     TargetTrajectories initTargetTrajectories({initObservation.time}, {initObservation.state}, {initObservation.input});
 
